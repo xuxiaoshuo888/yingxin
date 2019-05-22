@@ -1,0 +1,60 @@
+<template>
+    <div>
+        <go-back :title="title"></go-back>
+        <div class="pad20">
+            <div class="info-band">
+                <div class="name-band">
+                    <div class="name">张三</div>
+                    <div class="notice">欢迎你，请完成填写！</div>
+                </div>
+                <img class="potrait" src="@/assets/img/Photo.png" alt="">
+            </div>
+            <div class="index-list-div" @click="toDetail(item.path)" v-for="(item,index) in list" :key="index">
+                <div>{{item.name}}
+                    <!--<van-icon class="state-icon" :name="item.flag ? 'checked' : 'info'"></van-icon>-->
+                    <img class="state-icon" v-if="item.flag === true" src="@/assets/img/right.png" alt="">
+                    <img class="state-icon" v-else src="@/assets/img/right.png" alt="">
+                </div>
+                <img src="@/assets/img/1.png" alt="">
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+    /**
+     * @author Xus
+     * @date 2019/5/6
+     * @Description: 首页
+     */
+    import goBack from '@/components/goBack'
+
+    export default {
+        name: "desk",
+        data() {
+            return {
+                title: '自助迎新',
+                list: [
+                    {name: '缴纳学杂费', icon: '@/assets/img/1.png', flag: true, path: '/fees'},
+                    {name: '选宿舍', icon: '@/assets/img/2.png', flag: false,path:'/greenPath'},
+                    {name: '绿色通道', icon: '@/assets/img/3.png', flag: false},
+                    {name: '一卡通充值', icon: '@/assets/img/4.png', flag: true},
+                    {name: '购买生活用品', icon: '@/assets/img/5.png', flag: true},
+                    {name: '军训服装', icon: '@/assets/img/6.png', flag: true},
+                    {name: '个人信息', icon: '@/assets/img/7.png', flag: true},
+                    {name: '户口迁移', icon: '@/assets/img/8.png', flag: true},
+                    {name: '抵校登记', icon: '@/assets/img/9.png', flag: true}
+                ]
+            }
+        },
+        components: {goBack},
+        methods: {
+            toDetail(path) {
+                this.$router.push(path)
+            }
+        }
+    }
+</script>
+
+<style scoped>
+
+</style>

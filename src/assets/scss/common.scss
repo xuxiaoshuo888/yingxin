@@ -1,0 +1,189 @@
+html {
+}
+
+body {
+  padding-top: 45px;
+  text-align: left;
+  //background: url("@/assets/img/Topbar.png") top no-repeat;
+}
+
+.goback-div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 23px;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  background-color: white;
+  border-bottom: 1px solid #E5E5E5;
+}
+
+.pad20 {
+  padding: 20px;
+}
+
+
+.button-bg {
+  background: linear-gradient(360deg, #06BEDD, #30DDDC);
+  color: #ffffff !important;
+  font-size: 16px;
+  font-family: PingFangSC-Regular;
+  font-weight: 400;
+  margin-top: 20px;
+  border: none;
+  outline: none;
+}
+
+
+/*
+覆盖element-ui样式
+ */
+.el-select {
+  width: 80%;
+}
+
+.el-select .el-input.is-focus .el-input__inner {
+  border-color: #06bedd !important;
+}
+
+.el-select-dropdown__item.selected {
+  color: #06bedd !important;
+}
+
+.info-band {
+  @include flex(space-between, center);
+  padding: 16px;
+  .potrait{
+    width: 58px;
+    height: 58px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+  }
+}
+
+.name-band {
+  text-align: left;
+
+  .name {
+    font-size: 20px;
+    color: rgba(50, 59, 69, 1);
+  }
+
+  .notice {
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(92, 105, 121, 1);
+  }
+}
+
+.index-list-div {
+  @include flex(space-between, center);
+  padding: 24px 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+  .index-list-div-item {
+
+  }
+
+  .state-icon {
+    margin-left: 10px;
+  }
+}
+
+state-icon van-icon van-icon-checked {
+  color: #6DD400 !important;
+}
+
+state-icon van-icon van-icon-info {
+  color: #FA2A00 !important;
+}
+
+.contain {
+  margin: 20px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0px 0px 40px 0px rgba(62, 107, 103, 0.16);
+  border-radius: 4px;
+}
+
+.title1 {
+  font-size: 24px;
+  font-family: PingFangSC-Medium;
+  font-weight: 500;
+  color: rgba(50, 59, 69, 1);
+  padding-bottom: 10px;
+  text-align: left;
+}
+
+.title2 {
+  font-size:16px;
+  font-family:PingFangSC-Medium;
+  font-weight:500;
+  color:rgba(49,59,69,1);
+  text-align: left;
+}
+
+.fee-content {
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow: 0px 0px 40px 0px rgba(62, 107, 103, 0.16);
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  //background: url("../img/wave.png");
+}
+
+.border-bottom {
+  border-bottom: 1px solid rgba(229, 229, 229, 1);
+}
+
+.border-top {
+  border-top: 1px solid rgba(229, 229, 229, 1);
+}
+
+.fee-contain {
+  padding: 16px;
+
+  .fee-item {
+    @include flex(space-between, center);
+    padding: 5px 0;
+    .fee-title {
+      font-size: 14px;
+      font-family: PingFangSC-Regular;
+      font-weight: 400;
+      color: rgba(92, 105, 121, 1);
+    }
+
+    .fee-content {
+      font-size: 12px;
+      font-family: PingFangSC-Ultralight;
+      font-weight: 200;
+      color: rgba(50, 59, 69, 1);
+    }
+  }
+}
+.color-theme{
+  color: #06BEBD !important;
+}
+.fee-total{
+  font-size: 24px !important;
+  color: #323B45 !important;
+}
+.radio-item{
+  padding: 10px 0;
+}
+.info{
+  font-size:12px;
+  font-family:PingFangSC-Regular;
+  font-weight:400;
+  color:rgba(168,182,200,1);
+}
+.info>div{
+  padding: 3px 0;
+}
+
+/*
+绿色通道
+ */
