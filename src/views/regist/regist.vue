@@ -3,8 +3,41 @@
         <go-back :title="title"></go-back>
         <div class="pad20">
             <div class="index-list-div" @click="onShow">
-                <div class="left-head">缓交方式</div>
+                <div class="left-head">交通方式</div>
                 <div class="right-content">{{currentChoose.name || '点击选取'}} ></div>
+            </div>
+            <div class="index-list-div" @click="onShow">
+                <div class="left-head">到达时间</div>
+                <div class="right-content">{{currentChoose.name || '点击选取'}} ></div>
+            </div>
+            <div class="index-list-div" @click="onShow">
+                <div class="left-head">到达地点</div>
+                <div class="right-content">{{currentChoose.name || '点击选取'}} ></div>
+            </div>
+
+            <div class="index-list-div">
+                <div class="left-head">同行人数</div>
+                <div class="right-content">
+                    {{value}}
+                </div>
+
+            </div>
+            <div style="padding: 30px 0;">
+                <van-slider
+                        v-model="value"
+                        active-color="#06BEBD"
+                        bar-height="4px"
+                        :max="max"
+                        :min='min'
+                        inactive-color="#A8B6C8"
+                >
+                    <div
+                            slot="button"
+                            class="slider-button"
+                    >
+                        {{ value }}
+                    </div>
+                </van-slider>
             </div>
             <div v-if="currentChoose.name == '生源地贷款'" class="index-list-div" @click="onShow_bank">
                 <div>贷款银行</div>
@@ -69,16 +102,19 @@
     /**
      * @author Xus
      * @date 2019/5/6
-     * @Description: 绿色通道
+     * @Description: 抵校登记
      */
     import goBack from '@/components/goBack'
-    import {Actionsheet} from 'vant'
+    import {Actionsheet, Slider} from 'vant'
 
     export default {
-        name: "greenpath",
+        name: "regist",
         data() {
             return {
-                title: '绿色通道',
+                value: 33,
+                max:100,
+                min:0,
+                title: '抵校登记',
                 chooseList: [//缓交方式
                     {name: '国家助学贷款'},
                     {name: '生源地贷款'},
@@ -100,7 +136,8 @@
         },
         components: {
             goBack,
-            [Actionsheet.name]: Actionsheet
+            [Actionsheet.name]: Actionsheet,
+            [Slider.name]: Slider
         },
         methods: {
             onShow() {

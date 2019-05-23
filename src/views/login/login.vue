@@ -44,7 +44,7 @@
                 /*
                 登陆逻辑
                  */
-                this.$router.push({path:'/desk'})
+                this.$router.push({path:'/notice'})
             }
         }
     }

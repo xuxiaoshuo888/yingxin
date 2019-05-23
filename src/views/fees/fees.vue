@@ -39,14 +39,12 @@
                 <van-radio name="WEPAY" checked-color="#06BEBD" class="radio-item">微信支付</van-radio>
             </van-radio-group>
         </div>
-        <div class="pad20">
-            <div class="info">
-                <div>温馨提示</div>
-                <div>1.缴纳学杂费前先开通建设银行网银。</div>
-                <div>2.请按照页面显示的步骤先后完成报到。</div>
-            </div>
+        <div class="info">
+            <div>温馨提示</div>
+            <div>1.缴纳学杂费前先开通建设银行网银。</div>
+            <div>2.请按照页面显示的步骤先后完成报到。</div>
         </div>
-        <div style="padding: 20px;">
+        <div class="btn-contain">
             <van-button type="info" size="large" class="button-bg">
                 确认
             </van-button>
@@ -75,5 +73,9 @@
 </script>
 
 <style scoped>
+.fee-content{
+    background: url("../../assets/img/wave.png") no-repeat scroll bottom;
+    background-size: 100% auto;
 
+}
 </style>

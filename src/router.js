@@ -11,6 +11,11 @@ export default new Router({
             component: () => import('./views/login/login.vue')
         },
         {
+            path: '/notice',
+            name: 'notice',
+            component: () => import('./views/notice/notice.vue')
+        },
+        {
             path: '/desk',
             name: 'desk',
             component: () => import('./views/desk/desk.vue')
@@ -24,6 +29,31 @@ export default new Router({
             path: '/greenPath',
             name: 'greenPath',
             component: () => import('./views/greenPath/greenPath.vue')
+        },
+        {
+            path: '/room',
+            name: 'room',
+            component: () => import('./views/room/room.vue')
+        },
+        {
+            path: '/roomList',
+            name: 'roomList',
+            component: () => import('./views/room/roomList.vue')
+        },
+        {
+            path: '/card',
+            name: 'card',
+            component: () => import('./views/card/card.vue')
+        },
+        {
+            path: '/regist',
+            name: 'regist',
+            component: () => import('./views/regist/regist.vue')
+        },
+        {
+            path: '/clothes',
+            name: 'clothes',
+            component: () => import('./views/clothes/clothes.vue')
         }
     ]
 })

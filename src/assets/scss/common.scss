@@ -4,7 +4,6 @@ html {
 body {
   padding-top: 45px;
   text-align: left;
-  //background: url("@/assets/img/Topbar.png") top no-repeat;
 }
 
 .goback-div {
@@ -55,7 +54,8 @@ body {
 .info-band {
   @include flex(space-between, center);
   padding: 16px;
-  .potrait{
+
+  .potrait {
     width: 58px;
     height: 58px;
     -webkit-border-radius: 50%;
@@ -91,6 +91,22 @@ body {
   .state-icon {
     margin-left: 10px;
   }
+
+  .left-head {
+    font-size: 16px;
+    font-family: PingFangSC-Regular;
+    font-weight: 400;
+    color: rgba(92, 105, 121, 1);
+  }
+
+  .right-content {
+    font-size: 16px;
+    font-family: PingFangSC-Regular;
+    font-weight: 400;
+    color: rgba(50, 59, 69, 1);
+  }
+
+
 }
 
 state-icon van-icon van-icon-checked {
@@ -119,10 +135,10 @@ state-icon van-icon van-icon-info {
 }
 
 .title2 {
-  font-size:16px;
-  font-family:PingFangSC-Medium;
-  font-weight:500;
-  color:rgba(49,59,69,1);
+  font-size: 16px;
+  font-family: PingFangSC-Medium;
+  font-weight: 500;
+  color: rgba(49, 59, 69, 1);
   text-align: left;
 }
 
@@ -132,7 +148,7 @@ state-icon van-icon van-icon-info {
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border-radius: 4px;
-  //background: url("../img/wave.png");
+  margin-bottom: 20px;
 }
 
 .border-bottom {
@@ -149,6 +165,7 @@ state-icon van-icon van-icon-info {
   .fee-item {
     @include flex(space-between, center);
     padding: 5px 0;
+
     .fee-title {
       font-size: 14px;
       font-family: PingFangSC-Regular;
@@ -164,26 +181,169 @@ state-icon van-icon van-icon-info {
     }
   }
 }
-.color-theme{
+
+.color-theme {
   color: #06BEBD !important;
 }
-.fee-total{
+
+.fee-total {
   font-size: 24px !important;
   color: #323B45 !important;
 }
-.radio-item{
+
+.radio-item {
   padding: 10px 0;
 }
-.info{
-  font-size:12px;
-  font-family:PingFangSC-Regular;
-  font-weight:400;
-  color:rgba(168,182,200,1);
+
+.info {
+  font-size: 12px;
+  font-family: PingFangSC-Regular;
+  font-weight: 400;
+  color: rgba(168, 182, 200, 1);
+  padding: 10px 20px 0;
 }
-.info>div{
+
+.info > div {
   padding: 3px 0;
 }
 
 /*
 绿色通道
  */
+.btn-contain {
+  padding: 0 20px 20px;
+}
+
+.van-button--info {
+  border: none !important;
+}
+
+/*
+选择宿舍
+ */
+.block-contain {
+  width: 100%;
+  overflow: scroll;
+  white-space: nowrap;
+  position: fixed;
+  top: 46px;
+  left: 0;
+  right: 0;
+  background-color: white;
+  border-bottom: 1px solid #E5E5E5;
+}
+
+.block {
+  display: inline-block;
+  border-radius: 6px;
+  padding: 8px 16px;
+  margin: 10px 8px;
+  border: 1px solid;
+  width: 60px;
+  text-align: center;
+}
+
+.block-active {
+  color: white;
+  background: rgba(6, 190, 189, 1);
+}
+
+.floor-contain {
+  border-radius: 4px;
+  border:1px solid rgba(168,182,200,1);
+  margin: 0 10px 10px !important;
+  padding: 20px 10px 5px;
+
+}
+
+.room-contain {
+  margin-bottom: 15px;
+
+}
+
+.room {
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
+  border-radius: 6px;
+  padding: 10px;
+}
+
+.room-name {
+  text-align: center;
+  font-size: 18px;
+  font-family: PingFangSC-Medium;
+  font-weight: 500;
+  color: rgba(96, 98, 102, 1);
+  margin: 10px 0;
+}
+
+.room-bed {
+  @include flex(stretch, center);
+
+  div {
+    flex-grow: 1;
+
+    img {
+      width: 90%;
+    }
+  }
+}
+
+.pop{
+  width: 80%;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+.show-bed-name{
+  margin: 20px 10px 0;
+  text-align: center;
+  font-size:16px;
+  font-family:SFProText-Medium;
+  font-weight:500;
+  color:rgba(58,68,74,1);
+}
+.pop-btn-contain {
+
+
+}
+
+
+/*
+一卡通
+ */
+
+
+/*
+抵校登记
+ */
+.slider-button{
+  background-color: #06BEBD;
+  color: white;
+  padding: 5px;
+  width: 24px;
+  height: 24px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
+}
+
+/*
+选择军训服装
+ */
+
+
+/*
+开始报道
+ */
+.notice{
+  font-size:14px;
+  font-family:PingFangSC-Regular;
+  font-weight:400;
+  color:rgba(50,59,69,1);
+}
