@@ -14,6 +14,7 @@
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         color: #2c3e50;
+        height: 100%;
     }
 
     #nav {
@@ -27,5 +28,10 @@
                 color: #42b983;
             }
         }
+    }
+    .blue-top-bg{
+        background: url("./assets/img/Topbar.png") no-repeat fixed;
+        background-size: 100% auto;
+        padding:20px !important;
     }
 </style>

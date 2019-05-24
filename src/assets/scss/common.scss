@@ -1,7 +1,10 @@
 html {
+  height: 100%
 }
 
 body {
+  height: 100%;
+  box-sizing: border-box;
   padding-top: 45px;
   text-align: left;
 }
@@ -250,7 +253,7 @@ state-icon van-icon van-icon-info {
 
 .floor-contain {
   border-radius: 4px;
-  border:1px solid rgba(168,182,200,1);
+  border: 1px solid rgba(168, 182, 200, 1);
   margin: 0 10px 10px !important;
   padding: 20px 10px 5px;
 
@@ -263,7 +266,7 @@ state-icon van-icon van-icon-info {
 
 .room {
   background: rgba(255, 255, 255, 1);
-  box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);
   border-radius: 6px;
   padding: 10px;
 }
@@ -289,20 +292,22 @@ state-icon van-icon van-icon-info {
   }
 }
 
-.pop{
+.pop {
   width: 80%;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
 }
-.show-bed-name{
+
+.show-bed-name {
   margin: 20px 10px 0;
   text-align: center;
-  font-size:16px;
-  font-family:SFProText-Medium;
-  font-weight:500;
-  color:rgba(58,68,74,1);
+  font-size: 16px;
+  font-family: SFProText-Medium;
+  font-weight: 500;
+  color: rgba(58, 68, 74, 1);
 }
+
 .pop-btn-contain {
 
 
@@ -317,7 +322,7 @@ state-icon van-icon van-icon-info {
 /*
 抵校登记
  */
-.slider-button{
+.slider-button {
   background-color: #06BEBD;
   color: white;
   padding: 5px;
@@ -330,7 +335,7 @@ state-icon van-icon van-icon-info {
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
   border-radius: 50%;
-  box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);
 }
 
 /*
@@ -341,9 +346,49 @@ state-icon van-icon van-icon-info {
 /*
 开始报道
  */
-.notice{
-  font-size:14px;
-  font-family:PingFangSC-Regular;
-  font-weight:400;
-  color:rgba(50,59,69,1);
+.notice {
+  font-size: 14px;
+  font-family: PingFangSC-Regular;
+  font-weight: 400;
+  color: rgba(50, 59, 69, 1);
+}
+
+/*
+登录
+ */
+.logo {
+  @include flex(space-around, center);
+  flex-direction: column;
+  padding: 20px 0;
+
+  img {
+    margin-bottom: 20px;
+  }
+
+  p {
+    font-size: 16px;
+    font-family: PingFangSC-Medium;
+    font-weight: 500;
+    color: rgba(50, 59, 69, 1);
+  }
+}
+
+.login-contain {
+  padding-top: 10vh;
+}
+
+.bg-blue-band {
+  background-color: white;
+  padding: 20px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  box-shadow: 0px 0px 40px 0px rgba(62, 107, 103, 0.16);
+}
+
+.fixed-bottom {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }

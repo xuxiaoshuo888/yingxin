@@ -13,7 +13,7 @@
                     <van-radio-group v-model="radio">
                         <div class="fee-item" v-for="i in 7">
                             <div class="fee-title">
-                                <van-radio :name="i">单选框 {{i}}</van-radio>
+                                <van-radio :name="i"  checked-color="#06BEBD">单选框 {{i}}</van-radio>
                             </div>
                             <div class="fee-body">￥10086.00</div>
                         </div>

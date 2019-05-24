@@ -1,6 +1,7 @@
 <template>
-    <div>
-        <div class="pad20" style="background-color: white;margin: 0 20px;">
+    <div class="blue-top-bg" style="margin-top: -45px;">
+        <div class="bg-blue-band" style="min-height: 300px">
+            <!--            style="background-color: white;margin: 0 20px;"-->
             <div class="info-band">
                 <div class="name-band">
                     <div class="name">张三</div>
@@ -16,16 +17,18 @@
                 </p>
             </div>
         </div>
-        <div class="pad20 read">
-            <van-checkbox v-model="radio" checked-color="#06BEBD">我已认真阅读上述信息</van-checkbox>
-        </div>
-        <div class="btn-contain">
-            <van-button plain type="danger" size="large" hairline>
-                上面不是我的信息
-            </van-button>
-            <van-button type="info" size="large" class="button-bg" @click="toDesk">
-                开始报道
-            </van-button>
+        <div class="fixed-bottom">
+            <div class="pad20 read">
+                <van-checkbox v-model="radio" checked-color="#06BEBD">我已认真阅读上述信息</van-checkbox>
+            </div>
+            <div class="btn-contain">
+                <van-button plain type="danger" size="large" hairline>
+                    上面不是我的信息
+                </van-button>
+                <van-button type="info" size="large" class="button-bg" @click="toDesk">
+                    开始报道
+                </van-button>
+            </div>
         </div>
     </div>
 </template>
@@ -61,8 +64,9 @@
         font-weight: 400;
         color: rgba(168, 182, 200, 1);
     }
+
     body {
-        background: url("../../assets/img/Topbar.png") no-repeat scroll 0 -50px;
+        background: url("../../assets/img/Topbar.png") no-repeat scroll;
         background-size: 100% auto;
     }
 </style>

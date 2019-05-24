@@ -1,7 +1,7 @@
 <template>
-    <div>
-        <go-back :title="title"></go-back>
-        <div class="pad20">
+    <div class="blue-top-bg">
+        <go-back :title="title" :bg="bg"></go-back>
+        <div class="bg-blue-band">
             <div class="info-band">
                 <div class="name-band">
                     <div class="name">张三</div>
@@ -32,6 +32,7 @@
         name: "desk",
         data() {
             return {
+                bg:'blue',
                 title: '自助迎新',
                 list: [
                     {name: '缴纳学杂费', icon: '@/assets/img/1.png', flag: true, path: '/fees'},
@@ -48,13 +49,29 @@
         },
         components: {goBack},
         methods: {
+            getStdInfo() {//获取学生信息
+                this.$ajax.post('/student/find').then(res => {
+
+                })
+            },
             toDetail(path) {
-                this.$router.push(path)
+                if (path) {
+                    this.$router.push(path)
+                } else {
+                    this.$toast('尽情期待！')
+                }
             }
+        },
+        mounted() {
+            // this.getStdInfo()
         }
     }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+    /*.blue-top-bg {*/
+    /*    background: url("../../assets/img/Topbar.png") no-repeat fixed;*/
+    /*    background-size: 100% auto;*/
+    /*}*/
 
 </style>

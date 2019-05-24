@@ -1,4 +1,6 @@
-const target='localhost:9090';
+// const target='http://localhost:9090/yx';
+const target='http://192.168.0.179:8080';
+// const target='http://localhost:9090';
 module.exports = {
   // 基本路径
   publicPath: './',
@@ -14,15 +16,14 @@ module.exports = {
   devServer:{
     port:8889,
     disableHostCheck: true,
-    proxy:{
-      '/proxy':{
-        target:target,
-        changeOrigin:true,
-        pathRewrite:{
-          '^/proxy':''
+    proxy: {
+      '/proxy': {
+        target: target,
+        changeOrigin: true,
+        pathRewrite: {
+          '^/proxy': ''
         }
       },
     },
-    // host:'192.168.0.137'
   }
 };

@@ -1,7 +1,7 @@
 <template>
     <div>
-        <go-back :title="title"></go-back>
-        <div class="pad20">
+        <go-back :title="title" :bg="bg"></go-back>
+        <div class="blue-top-bg">
             <div class="band">
                 <div class="title1">当前选择</div>
                 <div class="title2">
@@ -9,10 +9,12 @@
                 </div>
             </div>
         </div>
-        <div class="btn-contain">
-            <van-button type="info" size="large" class="button-bg" @click="toRoomList">
-                重新选择
-            </van-button>
+        <div class="fixed-bottom">
+            <div class="btn-contain">
+                <van-button type="default" plain size="large" @click="toRoomList">
+                    重新选择
+                </van-button>
+            </div>
         </div>
     </div>
 </template>
@@ -30,11 +32,12 @@
         components: {goBack},
         data() {
             return {
+                bg: 'blue',
                 title: '选择宿舍'
             }
         },
-        methods:{
-            toRoomList(){
+        methods: {
+            toRoomList() {
                 this.$router.push('roomList')
             }
         }
