@@ -11,11 +11,9 @@
             </div>
             <div class="notice">
                 <p><span style="color: red;">*</span>注意事项</p>
-                <p>1.开始报到前请仔细查看页面上的姓名和学号,无误后再点击"开始报到"按钮.</p>
-                <p>2.如果以上信息不是自己的信息,请停止操作,并立即联系管理员或通过新生qq群联系辅导员, 管理员联系电话:
-                    <span style="color: #06BEBD;">027-6826374</span>
-                </p>
+                <p v-html="text"></p>
             </div>
+
         </div>
         <div class="fixed-bottom">
             <div class="pad20 read">
@@ -25,7 +23,7 @@
                 <van-button plain type="danger" size="large" hairline>
                     上面不是我的信息
                 </van-button>
-                <van-button type="info" size="large" class="button-bg" @click="toDesk">
+                <van-button type="info" :disabled="!radio" size="large" class="button-bg" @click="updateRead()">
                     开始报道
                 </van-button>
             </div>
@@ -38,6 +36,10 @@
      * @date 2019/5/6
      * @Description: 首页
      */
+    /*
+    1、从cookie中读取用户信息
+    2、点击开始报道，请求接口，标识已读，跳转到desk
+     */
     import goBack from '@/components/goBack'
 
     export default {
@@ -45,14 +47,32 @@
         data() {
             return {
                 title: '自助迎新',
-                radio: 2
+                radio: false,
+                name: '',
+                photo: '',
+                text: ''
             }
         },
         components: {goBack},
         methods: {
-            toDesk() {
-                this.$router.push('/desk')
+            getText() {
+                this.$ajax.post('/notice').then(res => {
+                    this.text = res.data.data.configvalue
+                })
+            },
+            updateRead() {
+                this.$ajax.post('/update_read_status').then(res => {
+                    if (res.data.errcode == 0) {
+                        this.$toast(res.data.errmsg)
+                        this.$router.push('/desk')
+                    } else {
+                        this.$toast(res.data.errmsg)
+                    }
+                })
             }
+        },
+        mounted() {
+            this.getText()
         }
     }
 </script>
@@ -63,6 +83,7 @@
         font-family: PingFangSC-Regular;
         font-weight: 400;
         color: rgba(168, 182, 200, 1);
+        background-color: white;
     }
 
     body {

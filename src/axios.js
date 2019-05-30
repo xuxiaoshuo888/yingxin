@@ -19,7 +19,7 @@ const instance = axios.create({
 // 添加请求拦截器
 instance.interceptors.request.use(function (config) {
     Toast.loading({
-        duration: 0,       // 持续展示 toast
+        duration: 5000,       // 持续展示 toast
         forbidClick: true, // 禁用背景点击
         loadingType: 'spinner',
         message: '加载中'

@@ -9,8 +9,8 @@
                 </div>
                 <img class="potrait" src="@/assets/img/Photo.png" alt="">
             </div>
-            <div class="index-list-div" @click="toDetail(item.path)" v-for="(item,index) in list" :key="index">
-                <div>{{item.name}}
+            <div class="index-list-div" @click="toDetail(item.stepid)" v-for="(item,index) in planList" :key="index">
+                <div>{{item.stepname}}
                     <!--<van-icon class="state-icon" :name="item.flag ? 'checked' : 'info'"></van-icon>-->
                     <img class="state-icon" v-if="item.flag === true" src="@/assets/img/right.png" alt="">
                     <img class="state-icon" v-else src="@/assets/img/right.png" alt="">
@@ -32,7 +32,7 @@
         name: "desk",
         data() {
             return {
-                bg:'blue',
+                bg: 'blue',
                 title: '自助迎新',
                 list: [
                     {name: '缴纳学杂费', icon: '@/assets/img/1.png', flag: true, path: '/fees'},
@@ -44,26 +44,70 @@
                     // {name: '个人信息', icon: '@/assets/img/7.png', flag: true},
                     // {name: '户口迁移', icon: '@/assets/img/8.png', flag: true},
                     {name: '抵校登记', icon: '@/assets/img/9.png', flag: true, path: '/regist'}
-                ]
+                ],
+                planList: []
             }
         },
         components: {goBack},
         methods: {
             getStdInfo() {//获取学生信息
                 this.$ajax.post('/student/find').then(res => {
-
+                    console.log(res.data)
                 })
             },
-            toDetail(path) {
-                if (path) {
-                    this.$router.push(path)
-                } else {
-                    this.$toast('尽情期待！')
+            toDetail(stepid) {//通过stepid进行跳转
+                switch (stepid) {
+                    case 'base'://基本信息
+                        // this.$router.push('/');
+                        break;
+                    case 'room'://选宿舍
+                        this.$router.push({path:'/room',query:{}});
+                        break;
+                    case 'pay'://费用信息
+                        this.$router.push('/fees');
+                        break;
+                    case 'green'://绿色通道
+                        this.$router.push('/greenPath');
+                        break;
+                    case 'bdxx'://抵校登记
+                        this.$router.push('/regist');
+                        break;
+                    case 'jxfff'://军训服选择
+                        this.$router.push('/clothes');
+                        break;
+                    case 'dept'://院系报道
+                        this.$router.push('/');
+                        break;
+                    case 'jffs'://缴费方式
+                        this.$router.push('/');
+                        break;
                 }
+            },
+            getHj() {//获取环节信息
+                let planId = this.$store.state.stdInfo.planid
+                // console.log(this.$store.state.stdInfo)
+                let studentId = this.$store.state.stdInfo.studentid
+                // console.log(studentId)
+                this.$ajax.get('/plan_step_api/steps', {
+                    params: {
+                        planId: planId,
+                        studentId: studentId
+                    }
+                }).then(res => {
+                    this.planList = res.data.data
+                })
+            },
+            getConfig() {//测试
+                let id = 'SCHOOL_NAME'
+                this.$ajax.get('/help_api/configs/' + id).then(res => {
+                    console.log(res.data)
+                })
             }
         },
         mounted() {
             // this.getStdInfo()
+            this.getHj()
+            this.getConfig()
         }
     }
 </script>

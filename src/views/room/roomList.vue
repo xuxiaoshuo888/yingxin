@@ -60,7 +60,15 @@
             },
             confirmBed() {
                 this.showPop = false
+            },
+            getList() {
+                this.$ajax.get('/dorm_api/rooms').then(res => {
+                    this.room = res.data.data
+                })
             }
+        },
+        mounted() {
+            this.getList()
         }
     }
 </script>

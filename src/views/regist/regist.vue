@@ -111,6 +111,10 @@
         name: "regist",
         data() {
             return {
+                arrive_info:"",//
+                ways:[],//交通方式列表
+                arriveTime:"",//到达时间
+                stations:[],//到达地点列表
                 value: 33,
                 max:100,
                 min:0,
@@ -154,9 +158,26 @@
                 this.currentChoose_bank.name = e.name
                 this.show_bank = false
             },
+            getInfo(){//获取学生信息
+                this.$ajax.get('/arrive_api/arrive_info').then(res => {
+                    this.arrive_info = res.data.data
+                })
+            },
+            getWay(){//获取交通方式
+                this.$ajax.get('/arrive_api/transports').then(res => {
+                    this.ways = res.data.data
+                })
+            },
+            getStation(){//车站信息
+                this.$ajax.get('/arrive_api/stations').then(res => {
+                    this.stations = res.data.data
+                })
+            }
         },
         mounted() {
-            console.log(Actionsheet)
+            this.getInfo()
+            this.getWay()
+            this.getStation()
         },
         ActionSheet() {
 

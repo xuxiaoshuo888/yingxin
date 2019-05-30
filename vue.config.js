@@ -1,5 +1,5 @@
 // const target='http://localhost:9090/yx';
-const target='http://192.168.0.179:8080';
+const target='http://192.168.0.179:8090';
 // const target='http://localhost:9090';
 module.exports = {
   // 基本路径

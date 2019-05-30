@@ -5,7 +5,7 @@
             <div class="band">
                 <div class="title1">当前选择</div>
                 <div class="title2">
-                    <img src="@/assets/img/2.png" alt="">&nbsp;&nbsp;&nbsp;瑶湖校区-学6栋-南楼-(瑶)6南415室-02床
+                    <img src="@/assets/img/2.png" alt="">&nbsp;&nbsp;&nbsp;<span>{{room.aptzone}}校区-{{room.apartment}}栋-{{room.floor}}-{{room.bedroom}}室-{{room.bedid}}床</span>
                 </div>
             </div>
         </div>
@@ -33,13 +33,38 @@
         data() {
             return {
                 bg: 'blue',
-                title: '选择宿舍'
+                title: '选择宿舍',
+                room:'',//当前宿舍信息
             }
         },
         methods: {
             toRoomList() {
                 this.$router.push('roomList')
-            }
+            },
+            //获取学生的住宿信息
+            getStep() {
+                this.$ajax.get('/dorm_api/dorm_info').then(res => {
+                    this.room = res.data.data
+                })
+            },
+            // getGongyu() {//公寓信息
+            //     this.$ajax.get('/dorm_api/apartments').then(res => {
+            //         console.log(res.data)
+            //     })
+            // },
+            // getStep() {
+            //     this.$ajax.get('/dorm_api/dorm_info').then(res => {
+            //         console.log(res.data)
+            //     })
+            // },
+            // getStep() {
+            //     this.$ajax.get('/dorm_api/dorm_info').then(res => {
+            //         console.log(res.data)
+            //     })
+            // }
+        },
+        mounted() {
+            this.getStep()
         }
     }
 </script>
