@@ -60,6 +60,12 @@
                     case 'base'://基本信息
                         // this.$router.push('/');
                         break;
+                    case 'hcyhk'://火车优惠卡
+                        this.$router.push('/hcyhk');
+                        break;
+                    case 'bdxx'://抵校登记
+                        this.$router.push('/regist');
+                        break;
                     case 'room'://选宿舍
                         this.$router.push({path:'/room',query:{}});
                         break;
@@ -69,9 +75,7 @@
                     case 'green'://绿色通道
                         this.$router.push('/greenPath');
                         break;
-                    case 'bdxx'://抵校登记
-                        this.$router.push('/regist');
-                        break;
+
                     case 'jxfff'://军训服选择
                         this.$router.push('/clothes');
                         break;
@@ -85,9 +89,7 @@
             },
             getHj() {//获取环节信息
                 let planId = this.$store.state.stdInfo.planid
-                // console.log(this.$store.state.stdInfo)
                 let studentId = this.$store.state.stdInfo.studentid
-                // console.log(studentId)
                 this.$ajax.get('/plan_step_api/steps', {
                     params: {
                         planId: planId,

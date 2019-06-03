@@ -7,7 +7,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
         token: Cookies.get('setToken') || '',
-        stdInfo: JSON.parse(Cookies.get('setStdInfo')) || {},//用户基本信息
+        stdInfo: Cookies.get('setStdInfo') || {},//用户基本信息
     },
     getters: {
         token: state => state.token,

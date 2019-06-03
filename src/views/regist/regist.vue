@@ -2,7 +2,7 @@
     <div>
         <go-back :title="title"></go-back>
         <div class="pad20">
-            <div class="index-list-div" @click="onShow">
+            <div class="index-list-div" @click="onShow_way">
                 <div class="left-head">交通方式</div>
                 <div class="right-content">{{currentChoose.name || '点击选取'}} ></div>
             </div>
@@ -17,9 +17,7 @@
 
             <div class="index-list-div">
                 <div class="left-head">同行人数</div>
-                <div class="right-content">
-                    {{value}}
-                </div>
+                <div class="right-content">{{value}}</div>
 
             </div>
             <div style="padding: 30px 0;">
@@ -59,31 +57,32 @@
                 <div>金额</div>
                 <div>￥23321 ></div>
             </div>
-            <!--缓交方式-->
-            <van-actionsheet
-                    v-model="show"
-                    :actions="chooseList"
-                    cancel-text="取消"
-                    @select="onSelect"
-            />
-            <!--贷款银行-->
-            <van-actionsheet
-                    v-model="show_bank"
-                    :actions="banList"
-                    cancel-text="取消"
-                    @select="onSelectBank"
-            />
-            <!---->
-            <van-cell-group>
-                <van-field
-                        v-model="reason"
-                        label="原因"
-                        type="textarea"
-                        placeholder="请输入原因"
-                        rows="1"
-                        :autosize='heightRange'
-                />
-            </van-cell-group>
+            <!--            &lt;!&ndash;缓交方式&ndash;&gt;-->
+            <!--            <van-actionsheet-->
+            <!--                    v-model="show"-->
+            <!--                    :actions="chooseList"-->
+            <!--                    cancel-text="取消"-->
+            <!--                    @select="onSelect"-->
+            <!--            />-->
+            <!--            &lt;!&ndash;贷款银行&ndash;&gt;-->
+            <!--            <van-actionsheet-->
+            <!--                    v-model="show_bank"-->
+            <!--                    :actions="banList"-->
+            <!--                    cancel-text="取消"-->
+            <!--                    @select="onSelectBank"-->
+            <!--            />-->
+            <!--            &lt;!&ndash;&ndash;&gt;-->
+            <!--            <van-cell-group>-->
+            <!--                <van-field-->
+            <!--                        v-model="reason"-->
+            <!--                        label="原因"-->
+            <!--                        type="textarea"-->
+            <!--                        placeholder="请输入原因"-->
+            <!--                        rows="1"-->
+            <!--                        :autosize='heightRange'-->
+            <!--                />-->
+            <!--            </van-cell-group>-->
+
         </div>
         <div class="info">
             <div>温馨提示</div>
@@ -95,6 +94,15 @@
                 提交
             </van-button>
         </div>
+        交通方式
+        <van-popup v-model="isShow_way" position="bottom" overlay>
+            <van-picker
+                    show-toolbar
+                    title="交通方式"
+                    :columns="ways"
+            />
+        </van-popup>
+
     </div>
 </template>
 
@@ -105,19 +113,30 @@
      * @Description: 抵校登记
      */
     import goBack from '@/components/goBack'
-    import {Actionsheet, Slider} from 'vant'
+    import {Actionsheet, Slider, Picker, Popup} from 'vant'
 
     export default {
         name: "regist",
         data() {
             return {
-                arrive_info:"",//
-                ways:[],//交通方式列表
-                arriveTime:"",//到达时间
-                stations:[],//到达地点列表
+                isShow_way: false,//交通方式
+                arrive_info: "",//
+                ways: [
+                    {text: '杭州', disabled: true},
+                    {text: '宁波'},
+                    {text: '温州'},
+                    {text: '火车'},
+                    {text: '汽车', disable: true},
+                    {text: '自行车'},
+                    {text: '步行'},
+                    {text: '乘船'},
+                    {text: '公交'}
+                ],//交通方式列表
+                arriveTime: "",//到达时间
+                stations: [],//到达地点列表
                 value: 33,
-                max:100,
-                min:0,
+                max: 100,
+                min: 0,
                 title: '抵校登记',
                 chooseList: [//缓交方式
                     {name: '国家助学贷款'},
@@ -141,9 +160,15 @@
         components: {
             goBack,
             [Actionsheet.name]: Actionsheet,
-            [Slider.name]: Slider
+            [Slider.name]: Slider,
+            [Picker.name]: Picker,
+            [Popup.name]: Popup
         },
         methods: {
+            onShow_way() {
+                this.isShow_way = true
+                console.log(123)
+            },
             onShow() {
                 this.show = true
             },
@@ -158,19 +183,22 @@
                 this.currentChoose_bank.name = e.name
                 this.show_bank = false
             },
-            getInfo(){//获取学生信息
+            getInfo() {//获取学生信息
                 this.$ajax.get('/arrive_api/arrive_info').then(res => {
                     this.arrive_info = res.data.data
+                    this.$toast.clear()
                 })
             },
-            getWay(){//获取交通方式
+            getWay() {//获取交通方式
                 this.$ajax.get('/arrive_api/transports').then(res => {
                     this.ways = res.data.data
+                    this.$toast.clear()
                 })
             },
-            getStation(){//车站信息
+            getStation() {//车站信息
                 this.$ajax.get('/arrive_api/stations').then(res => {
                     this.stations = res.data.data
+                    this.$toast.clear()
                 })
             }
         },
