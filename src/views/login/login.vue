@@ -72,10 +72,12 @@
                     this.$store.commit('setToken', res.data.token)
                     this.$ajax.get('/student_api/student').then(res => {
                         console.log(res)
-                        this.$store.commit('setStdInfo', res.data.data)
-                        if(res.data.data.readflag === '0'){//未读
+                        // let info = JSON.stringify(res.data.data)
+                        let info = res.data.data
+                        this.$store.commit('setStdInfo', info)
+                        if (res.data.data.readflag === '0') {//未读
                             this.$router.push('/notice')
-                        }else{//已读
+                        } else {//已读
                             this.$router.push('/desk')
                         }
                     })

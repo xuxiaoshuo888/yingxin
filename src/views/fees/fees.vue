@@ -3,31 +3,45 @@
         <go-back :title="title"></go-back>
         <div class="pad20">
             <div class="title1">
-                收费信息
+                学杂费条目
             </div>
             <div class="fee-content">
+                <div class="fee-contain border-bottom" v-for="item in payList">
+                    <div>{{item.xmmc}}</div>
+                    <div class="fee-item">
+                        <div class="fee-title">应收金额</div>
+                        <div class="fee-body">{{item.ysje}}元</div>
+                    </div>
+                    <div class="fee-item">
+                        <div class="fee-title">欠费金额</div>
+                        <div class="fee-body">{{item.qfje}}元</div>
+                    </div>
+                </div>
                 <div class="fee-contain border-bottom">
-                    <div class="fee-item" v-for="i in 4">
-                        <div class="fee-title">学杂费</div>
-                        <div class="fee-body">￥10086.00</div>
-                    </div>
-                </div>
-                <div class="fee-contain">
-                    <div class="fee-item" v-for="i in 3">
-                        <div class="fee-title">学杂费</div>
-                        <div class="fee-body">￥10086.00</div>
-                    </div>
-                </div>
-                <div class="fee-contain border-top">
-                    <div class="fee-item" v-for="i in 2">
-                        <div class="fee-title">学杂费</div>
-                        <div class="fee-body">￥10086.00</div>
-                    </div>
                     <div class="fee-item fee-total">
-                        <div class="fee-title" style="font-size: 16px">学杂费</div>
-                        <div class="fee-body color-theme" style="font-size: 24px">￥10086.00</div>
+                        <div class="fee-title" style="font-size: 16px">总计</div>
+                        <div class="fee-body color-theme" style="font-size: 24px">￥{{total}}元</div>
                     </div>
                 </div>
+                <!--                <div class="fee-contain">-->
+                <!--                    <div>贷款信息</div>-->
+                <!--                    <div class="fee-item" v-for="item in loan">-->
+                <!--                        <div class="fee-title">{{item.loanyh}}</div>-->
+                <!--                        <div class="fee-body">{{item.sqje}}</div>-->
+                <!--                    </div>-->
+                <!--                </div>-->
+                <!--                <div class="fee-contain border-top">-->
+                <!--                    <div>缓交信息</div>-->
+                <!--                    <div class="fee-item" v-for="(item,index) in postpone">-->
+                <!--                        <div class="fee-title">{{index}}</div>-->
+                <!--                        <div class="fee-body">{{item.hjje}}</div>-->
+                <!--                    </div>-->
+                <!--                    <div class="fee-item fee-total">-->
+                <!--                        <div>总计</div>-->
+                <!--                        <div class="fee-title" style="font-size: 16px">学杂费</div>-->
+                <!--                        <div class="fee-body color-theme" style="font-size: 24px">￥10086.00</div>-->
+                <!--                    </div>-->
+                <!--                </div>-->
             </div>
         </div>
         <div class="pad20">
@@ -65,17 +79,40 @@
         data() {
             return {
                 title: '缴纳学杂费',
-                payWay: 'ALIPAY'
+                payWay: 'ALIPAY',
+                loan: [],//贷款信息
+                payList: [],//学杂费条目
+                postpone: [],//缓交信息
+                //总计= 学杂费-贷款-缓交
+                total: 0
             }
         },
-        components: {goBack}
+        components: {goBack},
+        methods: {
+            getInfo() {//获取缴费信息
+                this.$ajax.get('/school_fees_api/fees').then(res => {
+                    this.payList = res.data.data.payList
+                    this.loan = res.data.data.loan
+                    this.postpone = res.data.data.postpone
+                    this.$toast.clear()
+                    let total = 0
+                    for (let i = 0; i < this.payList.length; i++) {
+                        total += this.payList[i].qfje
+                    }
+                    this.total = total
+                })
+            },
+        },
+        mounted() {
+            this.getInfo()
+        }
     }
 </script>
 
 <style scoped>
-.fee-content{
-    background: url("../../assets/img/wave.png") no-repeat scroll bottom;
-    background-size: 100% auto;
+    .fee-content {
+        background: url("../../assets/img/wave.png") no-repeat scroll bottom;
+        background-size: 100% auto;
 
-}
+    }
 </style>

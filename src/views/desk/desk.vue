@@ -58,7 +58,7 @@
             toDetail(stepid) {//通过stepid进行跳转
                 switch (stepid) {
                     case 'base'://基本信息
-                        // this.$router.push('/');
+                        this.$router.push('/person');
                         break;
                     case 'hcyhk'://火车优惠卡
                         this.$router.push('/hcyhk');
@@ -67,7 +67,7 @@
                         this.$router.push('/regist');
                         break;
                     case 'room'://选宿舍
-                        this.$router.push({path:'/room',query:{}});
+                        this.$router.push({path: '/room', query: {}});
                         break;
                     case 'pay'://费用信息
                         this.$router.push('/fees');
@@ -85,9 +85,13 @@
                     case 'jffs'://缴费方式
                         this.$router.push('/');
                         break;
+                    case 'aqjy'://安全教育
+                        this.$router.push('/safe');
+                        break;
                 }
             },
             getHj() {//获取环节信息
+                console.log(this.$store.state.stdInfo)
                 let planId = this.$store.state.stdInfo.planid
                 let studentId = this.$store.state.stdInfo.studentid
                 this.$ajax.get('/plan_step_api/steps', {
@@ -96,6 +100,7 @@
                         studentId: studentId
                     }
                 }).then(res => {
+                    this.$toast.clear()
                     this.planList = res.data.data
                 })
             },
@@ -103,6 +108,7 @@
                 let id = 'SCHOOL_NAME'
                 this.$ajax.get('/help_api/configs/' + id).then(res => {
                     console.log(res.data)
+                    this.$toast.clear()
                 })
             }
         },

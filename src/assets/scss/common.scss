@@ -20,6 +20,7 @@ body {
   top: 0;
   background-color: white;
   border-bottom: 1px solid #E5E5E5;
+  z-index: 999;
 }
 
 .pad20 {
@@ -394,4 +395,25 @@ state-icon van-icon van-icon-info {
   bottom: 0;
   left: 0;
   right: 0;
+}
+
+.el-tabs__content {
+  padding: 20px;
+}
+
+/*个人信息*/
+.person-div {
+  width: 30%;
+  margin: 0 auto 10px;
+
+  & > img {
+    width: 100%;
+  }
+}
+
+.item-content {
+  font-size: 16px;
+  font-family: PingFangSC-Medium;
+  font-weight: 500;
+  color: rgba(50, 59, 69, 1);
 }

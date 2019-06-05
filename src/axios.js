@@ -9,7 +9,7 @@ import {Toast} from 'vant';
 const instance = axios.create({
     // baseURL: process.env.NODE_ENV === 'production' ? '' : '/proxy',// `baseURL` 将自动加在 `url` 前面，除非 `url` 是一个绝对 URL。
     baseURL: '/proxy',
-    timeout: 50000,// `timeout` 指定请求超时的毫秒数(0 表示无超时时间)
+    timeout: 5000,// `timeout` 指定请求超时的毫秒数(0 表示无超时时间)
     headers: {// `headers` 是即将被发送的自定义请求头
         'Content-Type': 'application/x-www-form-urlencoded'
     },
@@ -19,7 +19,7 @@ const instance = axios.create({
 // 添加请求拦截器
 instance.interceptors.request.use(function (config) {
     Toast.loading({
-        duration: 0,       // 持续展示 toast
+        duration: 1000,       // 持续展示 toast
         forbidClick: true, // 禁用背景点击
         loadingType: 'spinner',
         message: '加载中'

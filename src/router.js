@@ -59,6 +59,16 @@ export default new Router({
             path: '/clothes',
             name: 'clothes',
             component: () => import('./views/clothes/clothes.vue')
+        },
+        {
+            path: '/person',
+            name: 'person',
+            component: () => import('./views/person/person.vue')
+        },
+        {
+            path: '/safe',
+            name: 'safe',
+            component: () => import('./views/safe/safe.vue')
         }
     ]
 })
