@@ -4,7 +4,7 @@
         <el-tabs v-model="activeName" @tab-click="handleClick">
             <el-tab-pane label="基本信息" name="基本信息">
                 <div class="person-div"><img src="@/assets/img/person.png" alt=""></div>
-                <el-form ref="form" :model="form" label-width="80px">
+                <el-form ref="form" :model="Info" label-width="80px" size="mini">
                     <el-form-item label="姓名:">
                         <div class="item-content">{{Info.xm}}</div>
                     </el-form-item>
@@ -44,7 +44,7 @@
                 </el-form>
             </el-tab-pane>
             <el-tab-pane label="辅导员信息" name="辅导员信息">
-                <el-form ref="form" :model="form" label-width="80px">
+                <el-form ref="form" :model="Info" label-width="80px" size="mini">
                     <el-form-item label="辅导员:">
                         <div class="item-content">{{Info.fdy || '暂无数据'}}</div>
                     </el-form-item>
@@ -54,7 +54,7 @@
                 </el-form>
             </el-tab-pane>
             <el-tab-pane label="学生信息" name="学生信息">
-                <el-form ref="form" :model="Info" label-width="100px">
+                <el-form ref="form" :model="Info" label-width="100px" size="mini">
                     <el-form-item label="曾用名">
                         <el-input v-model="Info.cym"></el-input>
                     </el-form-item>
@@ -136,7 +136,7 @@
                 </el-form>
             </el-tab-pane>
             <el-tab-pane label="家庭详细信息" name="家庭详细信息">
-                <el-form ref="form" :model="Info" label-width="180px">
+                <el-form ref="form" :model="Info" label-width="180px" size="mini">
                     <el-form-item label="是否建档立卡平困户">
                         <el-radio-group v-model="Info.sfjdlkpkh">
                             <el-radio label="是"></el-radio>
@@ -264,20 +264,91 @@
             </el-tab-pane>
             <el-tab-pane label="直系家庭成员" name="直系家庭成员">
                 <div>父母和未结婚的兄弟姐妹</div>
-                <el-form ref="form" :model="Info.family" label-width="80px">
-                    <el-form-item label="姓名">
-                        <el-input v-model="Info.family.xm"></el-input>
+                <el-carousel :interval="5000" arrow="always" :loop="loop" height="500px">
+                    <el-carousel-item v-for="(item,index) in Info.family" :key="index">
+                        <div>成员{{index + 1}}</div>
+                        <el-form label-width="80px" size="mini">
+                            <el-form-item label="姓名">
+                                <el-input v-model="item.xm"></el-input>
+                            </el-form-item>
+                            <el-form-item label="关系">
+                                <el-input v-model="item.gx"></el-input>
+                            </el-form-item>
+                            <el-form-item label="年龄">
+                                <el-input v-model="item.nl"></el-input>
+                            </el-form-item>
+                            <el-form-item label="学历">
+                                <el-input v-model="item.xl"></el-input>
+                            </el-form-item>
+                            <el-form-item label="工作单位">
+                                <el-input v-model="item.gzdw"></el-input>
+                            </el-form-item>
+                            <el-form-item label="联系电话">
+                                <el-input v-model="item.lxdh"></el-input>
+                            </el-form-item>
+                            <el-form-item label="职业">
+                                <el-input v-model="item.zy"></el-input>
+                            </el-form-item>
+                            <el-form-item label="月收入">
+                                <el-input v-model="item.ysr"></el-input>
+                            </el-form-item>
+                            <el-form-item label="健康状况">
+                                <el-input v-model="item.jkzk"></el-input>
+                            </el-form-item>
+                        </el-form>
+                    </el-carousel-item>
+                </el-carousel>
+            </el-tab-pane>
+            <el-tab-pane label="主要社会关系" name="主要社会关系">
+                <div>其他</div>
+                <el-carousel :interval="5000" arrow="always" :loop="loop" height="400px">
+                    <el-carousel-item v-for="(item,index) in Info.relatives" :key="index">
+                        <div>成员{{index + 1}}</div>
+                        <el-form label-width="80px" size="mini">
+                            <el-form-item label="姓名">
+                                <el-input v-model="item.xm"></el-input>
+                            </el-form-item>
+                            <el-form-item label="关系">
+                                <el-input v-model="item.gx"></el-input>
+                            </el-form-item>
+                            <el-form-item label="年龄">
+                                <el-input v-model="item.nl"></el-input>
+                            </el-form-item>
+                            <el-form-item label="政治面貌">
+                                <el-input v-model="item.zzmm"></el-input>
+                            </el-form-item>
+                            <el-form-item label="工作单位">
+                                <el-input v-model="item.gzdw"></el-input>
+                            </el-form-item>
+                            <el-form-item label="联系电话">
+                                <el-input v-model="item.lxdh"></el-input>
+                            </el-form-item>
+                            <el-form-item label="职业">
+                                <el-input v-model="item.zy"></el-input>
+                            </el-form-item>
+                            <el-form-item label="民族">
+                                <el-input v-model="item.mz"></el-input>
+                            </el-form-item>
+                        </el-form>
+                    </el-carousel-item>
+                </el-carousel>
+            </el-tab-pane>
+            <el-tab-pane label="团员信息" name="团员信息">
+                <el-form label-width="80px" size="mini">
+                    <el-form-item label="是否入团">
+                        <el-radio-group v-model="Info.tyxxsfrt">
+                            <el-radio label="是"></el-radio>
+                            <el-radio label="否"></el-radio>
+                        </el-radio-group>
+                    </el-form-item>
+                    <el-form-item label="入团时间">
+                        <el-date-picker type="date" v-model="Info.tyxxrtsj"></el-date-picker>
                     </el-form-item>
                 </el-form>
             </el-tab-pane>
-            <el-tab-pane label="主要社会关系" name="主要社会关系">定时任务补偿</el-tab-pane>
-            <el-tab-pane label="团员信息" name="团员信息">定时任务补偿</el-tab-pane>
             <el-tab-pane label="党员信息" name="党员信息">定时任务补偿</el-tab-pane>
             <el-tab-pane label="紧急联系人" name="紧急联系人">定时任务补偿</el-tab-pane>
         </el-tabs>
-        <div class="pad20">
-
-        </div>
     </div>
 </template>
 
@@ -290,8 +361,21 @@
         data() {
             return {
                 title: '个人信息',
+                loop: false,//轮播图是否回环播放
                 Info: {
-                    family: [],
+                    family: [
+                        {
+                            xm: "",
+                            gx: "",
+                            nl: "",
+                            xl: "",
+                            gzdw: "",
+                            lxdh: "",
+                            zy: "",
+                            ysr: "",
+                            jkzk: "",
+                        }
+                    ],
                     relatives: []
                 },//详细信息
                 campus: [],//校区
@@ -301,8 +385,6 @@
                 disabilities: [],//残疾类型
                 incomeSources: [],//收入来源
                 activeName: "基本信息",
-
-
             }
         },
         components: {
@@ -323,6 +405,33 @@
             getDetail() {//获取学生详情
                 this.$ajax.get('/student_api/student_detail').then(res => {
                     this.Info = res.data.data
+                    if (res.data.data.family.length == 0) {
+                        let familyItem = {
+                            xm: "",
+                            gx: "",
+                            nl: "",
+                            xl: "",
+                            gzdw: "",
+                            lxdh: "",
+                            zy: "",
+                            ysr: "",
+                            jkzk: "",
+                        }
+                        this.Info.family.push(familyItem)
+                    }
+                    if (res.data.data.relatives.length == 0) {
+                        let relativesItem = {
+                            xm: "",
+                            gx: "",
+                            nl: "",
+                            zzmm: "",
+                            gzdw: "",
+                            lxdh: "",
+                            zy: "",
+                            mz: ""
+                        }
+                        this.Info.relatives.push(relativesItem)
+                    }
                 })
             },
             getOptions() {//获取选项
@@ -339,10 +448,21 @@
         mounted() {
             this.getDetail()
             this.getOptions()
+            window.vue = this;
         }
     }
 </script>
 
 <style scoped lang="scss">
+    .flex-contain {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        /*width: 100%;*/
+        overflow-x: scroll;
 
+        .flex-block {
+            width: 400px !important;
+        }
+    }
 </style>

@@ -417,3 +417,10 @@ state-icon van-icon van-icon-info {
   font-weight: 500;
   color: rgba(50, 59, 69, 1);
 }
+/*个人信息中修改轮播图内容区域内边距*/
+.el-tabs__content{
+  padding: 0 10px;
+}
+.el-select{
+  width: 100%;
+}
