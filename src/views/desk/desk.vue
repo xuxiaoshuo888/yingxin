@@ -12,10 +12,10 @@
             <div class="index-list-div" @click="toDetail(item.stepid)" v-for="(item,index) in planList" :key="index">
                 <div>{{item.stepname}}
                     <!--<van-icon class="state-icon" :name="item.flag ? 'checked' : 'info'"></van-icon>-->
-                    <img class="state-icon" v-if="item.flag === true" src="@/assets/img/right.png" alt="">
-                    <img class="state-icon" v-else src="@/assets/img/right.png" alt="">
+                    <img class="state-icon" v-if="item.status === '1'" src="@/assets/img/right.png" alt="">
+                    <img class="state-icon" v-else src="@/assets/img/warn.png" alt="">
                 </div>
-                <img src="@/assets/img/1.png" alt="">
+                <img :src="`@/assets/img/${index}.png`" alt="">
             </div>
         </div>
     </div>
@@ -35,15 +35,15 @@
                 bg: 'blue',
                 title: '自助迎新',
                 list: [
-                    {name: '缴纳学杂费', icon: '@/assets/img/1.png', flag: true, path: '/fees'},
-                    {name: '选宿舍', icon: '@/assets/img/2.png', flag: false, path: '/room'},
-                    {name: '绿色通道', icon: '@/assets/img/3.png', flag: false, path: '/greenPath'},
-                    {name: '一卡通充值', icon: '@/assets/img/4.png', flag: true, path: '/card'},
+                    // {name: '缴纳学杂费', icon: '@/assets/img/1.png', flag: true, path: '/fees'},
+                    // {name: '选宿舍', icon: '@/assets/img/2.png', flag: false, path: '/room'},
+                    // {name: '绿色通道', icon: '@/assets/img/3.png', flag: false, path: '/greenPath'},
+                    // {name: '一卡通充值', icon: '@/assets/img/4.png', flag: true, path: '/card'},
                     // {name: '购买生活用品', icon: '@/assets/img/5.png', flag: true},
-                    {name: '军训服装', icon: '@/assets/img/6.png', flag: true, path: '/clothes'},
+                    // {name: '军训服装', icon: '@/assets/img/6.png', flag: true, path: '/clothes'},
                     // {name: '个人信息', icon: '@/assets/img/7.png', flag: true},
                     // {name: '户口迁移', icon: '@/assets/img/8.png', flag: true},
-                    {name: '抵校登记', icon: '@/assets/img/9.png', flag: true, path: '/regist'}
+                    // {name: '抵校登记', icon: '@/assets/img/9.png', flag: true, path: '/regist'}
                 ],
                 planList: []
             }
@@ -75,7 +75,6 @@
                     case 'green'://绿色通道
                         this.$router.push('/greenPath');
                         break;
-
                     case 'jxfff'://军训服选择
                         this.$router.push('/clothes');
                         break;

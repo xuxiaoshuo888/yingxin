@@ -93,6 +93,8 @@ body {
   }
 
   .state-icon {
+    width: 14px;
+    height: 14px;
     margin-left: 10px;
   }
 
@@ -423,4 +425,12 @@ state-icon van-icon van-icon-info {
 }
 .el-select{
   width: 100%;
+}
+
+.el-tabs__content{
+  padding-bottom: 50px;
+}
+.btn-area{
+  text-align: center;
+  padding-bottom: 20px;
 }

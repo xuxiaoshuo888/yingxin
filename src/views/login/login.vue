@@ -3,7 +3,7 @@
         <div>
             <div class="logo">
                 <img src="@/assets/img/Logo.png" alt="">
-                <p>北京大学</p>
+                <p>中国地质大学</p>
             </div>
             <div class="pad20">
                 <van-field
