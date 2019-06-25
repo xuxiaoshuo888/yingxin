@@ -267,10 +267,10 @@
                 </el-form>
             </el-tab-pane>
             <el-tab-pane label="直系家庭成员" name="直系家庭成员">
-                <div>父母和未结婚的兄弟姐妹</div>
-                <el-carousel :interval="5000" arrow="always" :loop="loop" height="500px">
+                <div>父母和未结婚的兄弟姐妹 <i class="el-icon-circle-plus" type="primary" @click="addFamily"></i></div>
+                <el-carousel :interval="5000" arrow="always" :loop="loop" indicator-position="outside" height="550px">
                     <el-carousel-item v-for="(item,index) in Info.family" :key="index">
-                        <div>成员{{index + 1}}</div>
+                        <div class="chengyuan">成员{{index + 1}}</div>
                         <el-form label-width="80px" size="mini">
                             <el-form-item label="姓名">
                                 <el-input v-model="item.xm"></el-input>
@@ -285,7 +285,7 @@
                                 <el-input v-model="item.xl"></el-input>
                             </el-form-item>
                             <el-form-item label="工作单位">
-                                <el-input v-model="item.gzdw"></el-input>
+                                <el-input v-model="item.dw"></el-input>
                             </el-form-item>
                             <el-form-item label="联系电话">
                                 <el-input v-model="item.lxdh"></el-input>
@@ -294,7 +294,7 @@
                                 <el-input v-model="item.zy"></el-input>
                             </el-form-item>
                             <el-form-item label="月收入">
-                                <el-input v-model="item.ysr"></el-input>
+                                <el-input v-model="item.ysr" type="number"></el-input>
                             </el-form-item>
                             <el-form-item label="健康状况">
                                 <el-input v-model="item.jkzk"></el-input>
@@ -304,7 +304,7 @@
                 </el-carousel>
             </el-tab-pane>
             <el-tab-pane label="主要社会关系" name="主要社会关系">
-                <div>其他</div>
+                <div>其他<i class="el-icon-circle-plus" type="primary" @click="addRelatives"></i></div>
                 <el-carousel :interval="5000" arrow="always" :loop="loop" height="400px">
                     <el-carousel-item v-for="(item,index) in Info.relatives" :key="index">
                         <div>成员{{index + 1}}</div>
@@ -433,11 +433,12 @@
                             gx: "",
                             nl: "",
                             xl: "",
-                            gzdw: "",
+                            dw: "",
                             lxdh: "",
                             zy: "",
                             ysr: "",
                             jkzk: "",
+                            gxlx: "0"
                         }
                     ],
                     relatives: []
@@ -467,7 +468,7 @@
                 console.log(tab)
                 console.log(event)
                 let data = JSON.stringify(this.Info)
-                console.log("格式化后的数据", data);
+                // console.log("格式化后的数据", data);
                 this.$ajax.post('/student_api/save', {"jsonObjectStr": data, "finishTag": false}).then(res => {
                 })
             },
@@ -475,31 +476,10 @@
                 this.$ajax.get('/student_api/student_detail').then(res => {
                     this.Info = res.data.data
                     if (res.data.data.family.length == 0) {
-                        let familyItem = {
-                            xm: "",
-                            gx: "",
-                            nl: "",
-                            xl: "",
-                            gzdw: "",
-                            lxdh: "",
-                            zy: "",
-                            ysr: "",
-                            jkzk: "",
-                        }
-                        this.Info.family.push(familyItem)
+                        this.addFamily()
                     }
                     if (res.data.data.relatives.length == 0) {
-                        let relativesItem = {
-                            xm: "",
-                            gx: "",
-                            nl: "",
-                            zzmm: "",
-                            gzdw: "",
-                            lxdh: "",
-                            zy: "",
-                            mz: ""
-                        }
-                        this.Info.relatives.push(relativesItem)
+                        this.addRelatives()
                     }
                 })
             },
@@ -512,6 +492,45 @@
                     this.disabilities = res.data.data.disabilities
                     this.incomeSources = res.data.data.incomeSources
                 })
+            },
+            addFamily() {
+                if (this.Info.family.length < 4) {
+                    let familyItem = {
+                        xm: "",
+                        gx: "",
+                        nl: "",
+                        xl: "",
+                        dw: "",
+                        lxdh: "",
+                        zy: "",
+                        ysr: "",
+                        jkzk: "",
+                        gxlx: "0"
+                    }
+                    this.Info.family.push(familyItem)
+                    this.$toast("添加成功！")
+                } else {
+                    this.$toast('最多填写四个成员')
+                }
+            },
+            addRelatives() {
+                if (this.Info.relatives.length < 4) {
+                    let relativesItem = {
+                        xm: "",
+                        gx: "",
+                        nl: "",
+                        zzmm: "",
+                        dw: "",
+                        lxdh: "",
+                        zy: "",
+                        mz: "",
+                        gxlx: "2"
+                    }
+                    this.Info.relatives.push(relativesItem)
+                    this.$toast("添加成功！")
+                } else {
+                    this.$toast('最多填写四个成员')
+                }
             }
         },
         mounted() {
@@ -558,5 +577,11 @@
 
     .el-tabs__content {
         background-color: #bfbfbf !important;
+    }
+    .chengyuan{
+        text-align: center;
+        padding: 15px 0;
+        color: #000;
+        font-size: 20px;
     }
 </style>
