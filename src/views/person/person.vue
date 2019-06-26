@@ -442,8 +442,6 @@
             <el-button v-if="activeName != '1'" type="primary" @click="prevStep">上一步</el-button>
             <el-button v-if="activeName != '10'" type="primary" @click="nextStep">下一步</el-button>
             <el-button v-if="activeName == '10'" type="primary" @click="submit">提交</el-button>
-            <!--            <van-button type="info">上一步</van-button>-->
-            <!--            <van-button type="info">下一步</van-button>-->
         </div>
     </div>
 </template>
