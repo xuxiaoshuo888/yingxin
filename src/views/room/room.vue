@@ -9,13 +9,13 @@
                 </div>
             </div>
         </div>
-        <div class="fixed-bottom">
-            <div class="btn-contain">
-                <van-button type="default" plain size="large" @click="toRoomList">
-                    重新选择
-                </van-button>
-            </div>
-        </div>
+        <!--<div class="fixed-bottom">-->
+            <!--<div class="btn-contain">-->
+                <!--<van-button type="default" plain size="large" @click="toRoomList">-->
+                    <!--重新选择-->
+                <!--</van-button>-->
+            <!--</div>-->
+        <!--</div>-->
     </div>
 </template>
 

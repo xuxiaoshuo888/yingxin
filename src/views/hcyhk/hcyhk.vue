@@ -1,6 +1,6 @@
 <template>
     <div>
-        <el-form ref="form" label-width="80px">
+        <el-form ref="form" label-width="80px" style="padding: 10px;">
             <el-form-item label="始发站">
                 <el-select
                         v-model="start_value"
@@ -38,8 +38,7 @@
         </el-form>
         <div class="info">
             <div>注意事项：</div>
-            <div>1.缴纳学杂费前先开通建设银行网银。</div>
-            <div>2.请按照页面显示的步骤先后完成报到。</div>
+            <div style="text-indent: 25px;">火车票优惠卡又称火车票学生优惠卡、学生购票优惠卡，是学生购买火车票打折用的卡，贴在学生证的后面。只有买了这个卡才能享受学生优惠。当你寒暑假往返家庭住地与学校区间须乘坐火车的，也可以凭此卡享受优惠。</div>
         </div>
         <div class="btn-contain">
             <van-button type="info" size="large" class="button-bg" @click="save">

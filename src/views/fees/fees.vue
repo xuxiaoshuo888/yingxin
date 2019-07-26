@@ -44,25 +44,24 @@
                 <!--                </div>-->
             </div>
         </div>
-        <div class="pad20">
-            <div class="title2">请选择支付方式</div>
-            <van-radio-group v-model="payWay">
-                <van-radio name="CCB" checked-color="#06BEBD" class="radio-item">中国建设银行</van-radio>
-                <van-radio name="BOC" checked-color="#06BEBD" class="radio-item">中国银行</van-radio>
-                <van-radio name="ALIPAY" checked-color="#06BEBD" class="radio-item">支付宝</van-radio>
-                <van-radio name="WEPAY" checked-color="#06BEBD" class="radio-item">微信支付</van-radio>
-            </van-radio-group>
-        </div>
+        <!--<div class="pad20">-->
+            <!--<div class="title2">请选择支付方式</div>-->
+            <!--<van-radio-group v-model="payWay">-->
+                <!--<van-radio name="CCB" checked-color="#06BEBD" class="radio-item">中国建设银行</van-radio>-->
+                <!--<van-radio name="BOC" checked-color="#06BEBD" class="radio-item">中国银行</van-radio>-->
+                <!--<van-radio name="ALIPAY" checked-color="#06BEBD" class="radio-item">支付宝</van-radio>-->
+                <!--<van-radio name="WEPAY" checked-color="#06BEBD" class="radio-item">微信支付</van-radio>-->
+            <!--</van-radio-group>-->
+        <!--</div>-->
         <div class="info">
             <div>温馨提示</div>
-            <div>1.缴纳学杂费前先开通建设银行网银。</div>
-            <div>2.请按照页面显示的步骤先后完成报到。</div>
+            <div>由于考虑都手机端支付安全问题，学杂费缴纳请统一到PC（电脑）端进行缴费。</div>
         </div>
-        <div class="btn-contain">
-            <van-button type="info" size="large" class="button-bg">
-                确认
-            </van-button>
-        </div>
+        <!--<div class="btn-contain">-->
+            <!--<van-button type="info" size="large" class="button-bg">-->
+                <!--确认-->
+            <!--</van-button>-->
+        <!--</div>-->
     </div>
 </template>
 

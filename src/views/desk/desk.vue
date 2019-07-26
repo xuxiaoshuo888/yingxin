@@ -4,7 +4,7 @@
         <div class="bg-blue-band">
             <div class="info-band">
                 <div class="name-band">
-                    <div class="name">张三</div>
+                    <div class="name">{{xm}}</div>
                     <div class="notice">欢迎你，请完成填写！</div>
                 </div>
                 <img class="potrait" src="@/assets/img/Photo.png" alt="">
@@ -15,7 +15,16 @@
                     <img class="state-icon" v-if="item.status === '1'" src="@/assets/img/right.png" alt="">
                     <img class="state-icon" v-else src="@/assets/img/warn.png" alt="">
                 </div>
-                <img :src="`@/assets/img/${index}.png`" alt="">
+                <img v-if="index == 0" src="../../assets/img/1.png">
+                <img v-else-if="index == 1" src="../../assets/img/8.png">
+                <img v-else-if="index == 2" src="../../assets/img/3.png">
+                <img v-else-if="index == 3" src="../../assets/img/4.png">
+                <img v-else-if="index == 4" src="../../assets/img/5.png">
+                <img v-else-if="index == 5" src="../../assets/img/6.png">
+                <img v-else-if="index == 6" src="../../assets/img/7.png">
+                <img v-else-if="index == 7" src="../../assets/img/8.png">
+                <img v-else-if="index == 8" src="../../assets/img/9.png">
+                <img v-else src="../../assets/img/1.png">
             </div>
         </div>
     </div>
@@ -32,6 +41,7 @@
         name: "desk",
         data() {
             return {
+                xm:"",
                 bg: 'blue',
                 title: '自助迎新',
                 list: [
@@ -90,7 +100,8 @@
                 }
             },
             getHj() {//获取环节信息
-                console.log(this.$store.state.stdInfo)
+                // console.log(this.$store.state.stdInfo)
+                this.xm = this.$store.state.stdInfo.xm
                 let planId = this.$store.state.stdInfo.planid
                 let studentId = this.$store.state.stdInfo.studentid
                 this.$ajax.get('/plan_step_api/steps', {

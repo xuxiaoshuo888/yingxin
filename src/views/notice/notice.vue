@@ -4,7 +4,7 @@
             <!--            style="background-color: white;margin: 0 20px;"-->
             <div class="info-band">
                 <div class="name-band">
-                    <div class="name">张三</div>
+                    <div class="name">{{xm}}</div>
                     <div class="notice">欢迎你，请完成填写！</div>
                 </div>
                 <img class="potrait" src="@/assets/img/Photo.png" alt="">
@@ -20,7 +20,7 @@
                 <van-checkbox v-model="radio" checked-color="#06BEBD">我已认真阅读上述信息</van-checkbox>
             </div>
             <div class="btn-contain">
-                <van-button plain type="danger" size="large" hairline>
+                <van-button plain type="danger" size="large" hairline @click="logout">
                     上面不是我的信息
                 </van-button>
                 <van-button type="info" :disabled="!radio" size="large" class="button-bg" @click="updateRead()">
@@ -46,6 +46,7 @@
         name: "desk",
         data() {
             return {
+                xm:"",
                 title: '自助迎新',
                 radio: false,
                 name: '',
@@ -55,6 +56,9 @@
         },
         components: {goBack},
         methods: {
+            init_name(){
+                this.xm = this.$store.state.stdInfo.xm
+            },
             getText() {
                 this.$ajax.post('/notice').then(res => {
                     this.text = res.data.data.configvalue
@@ -69,10 +73,17 @@
                         this.$toast(res.data.errmsg)
                     }
                 })
+            },
+            logout(){
+                this.$toast("请联系管理员！")
+                setTimeout(()=>{
+                    this.$router.push('/')
+                },3000)
             }
         },
         mounted() {
             this.getText()
+            this.init_name()
         }
     }
 </script>

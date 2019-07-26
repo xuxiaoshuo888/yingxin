@@ -31,32 +31,38 @@
             <div class="item-content">{{Info.mz || '暂无数据'}}</div>
           </el-form-item>
           <el-form-item label="学院:">
-            <div class="item-content">{{Info.xy || '暂无数据'}}</div>
+            <div class="item-content">{{Info.deptname || '暂无数据'}}</div>
           </el-form-item>
           <el-form-item label="专业:">
-            <div class="item-content">{{Info.zy || '暂无数据'}}</div>
+            <div class="item-content">{{Info.majorname || '暂无数据'}}</div>
           </el-form-item>
           <el-form-item label="班级:">
-            <div class="item-content">{{Info.bj || '暂无数据'}}</div>
+            <div class="item-content">{{Info.classname || '暂无数据'}}</div>
           </el-form-item>
           <el-form-item label="政治面貌:">
             <div class="item-content">{{Info.zzmm || '暂无数据'}}</div>
           </el-form-item>
           <el-form-item label="出生年月:">
-            <div class="item-content">{{Info.csny || '暂无数据'}}</div>
+            <div class="item-content">{{Info.csrq || '暂无数据'}}</div>
           </el-form-item>
-          <el-form-item label="入学年份:">
-            <div class="item-content">{{Info.rxnf || '暂无数据'}}</div>
+          <el-form-item label="入学年月:">
+            <div class="item-content">{{Info.rxny || '暂无数据'}}</div>
           </el-form-item>
         </el-form>
       </el-tab-pane>
       <el-tab-pane label="辅导员信息" name="2">
         <el-form ref="form" :model="Info" label-width="80px" size="mini">
-          <el-form-item label="辅导员:">
-            <div class="item-content">{{Info.fdy || '暂无数据'}}</div>
+          <el-form-item label="辅导员:" v-for="(item,index) in Info.headmaster" v-if="Info.headmaster.length > 0" :key="index">
+            <div class="item-content" v-if="item.lx == 'bzr'">{{item.xm}},tel：{{item.tel}}</div>
           </el-form-item>
-          <el-form-item label="志愿者:" v-for="(item,index) in Info.volunteer" :key="index">
-            <div class="item-content">{{item.xm}}，tel：{{item.lxdh}}</div>
+          <el-form-item label="辅导员:" v-for="(item,index) in Info.headmaster" v-else :key="index">
+            <div class="item-content" v-if="item.lx == 'bzr'">暂无数据</div>
+          </el-form-item>
+          <el-form-item label="志愿者:" v-for="(item,index) in Info.volunteer" v-if="Info.volunteer.length > 0" :key="index">
+            <div class="item-content">{{item.xm}},tel：{{item.lxdh}}</div>
+          </el-form-item>
+          <el-form-item label="志愿者:" v-for="(item,index) in Info.volunteer" v-else :key="index">
+            <div class="item-content">暂无数据</div>
           </el-form-item>
         </el-form>
       </el-tab-pane>

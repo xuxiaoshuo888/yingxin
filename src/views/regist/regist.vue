@@ -16,7 +16,7 @@
             </div>
 
             <div class="index-list-div">
-                <div class="left-head">同行人数</div>
+                <div class="left-head">同行人数(不含自己)</div>
                 <div class="right-content">{{fellow}}</div>
 
             </div>
@@ -51,11 +51,11 @@
             <!--                <div>￥23321 ></div>-->
             <!--            </div>-->
         </div>
-        <div class="info">
-            <div>温馨提示</div>
-            <div>1.缴纳学杂费前先开通建设银行网银。</div>
-            <div>2.请按照页面显示的步骤先后完成报到。</div>
-        </div>
+        <!--<div class="info">-->
+            <!--<div>温馨提示</div>-->
+            <!--<div>1.缴纳学杂费前先开通建设银行网银。</div>-->
+            <!--<div>2.请按照页面显示的步骤先后完成报到。</div>-->
+        <!--</div>-->
         <div class="btn-contain">
             <van-button type="info" size="large" class="button-bg" @click="submit">
                 提交

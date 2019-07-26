@@ -7,9 +7,9 @@ import {Toast} from 'vant';
 
 //创建实例 axios.create([config])
 const instance = axios.create({
-    // baseURL: process.env.NODE_ENV === 'production' ? '' : '/proxy',// `baseURL` 将自动加在 `url` 前面，除非 `url` 是一个绝对 URL。
-    baseURL: '/proxy',
-    timeout: 5000,// `timeout` 指定请求超时的毫秒数(0 表示无超时时间)
+    baseURL: process.env.NODE_ENV === 'production' ? '/wx' : '/proxy',// `baseURL` 将自动加在 `url` 前面，除非 `url` 是一个绝对 URL。
+    // baseURL: '/proxy',
+    timeout: 10000,// `timeout` 指定请求超时的毫秒数(0 表示无超时时间)
     headers: {// `headers` 是即将被发送的自定义请求头
         'Content-Type': 'application/x-www-form-urlencoded'
     },
@@ -30,6 +30,8 @@ instance.interceptors.request.use(function (config) {
     // 判断是否存在token，如果存在将每个页面header都添加token
     if (store.getters.token) {
         config.headers.Authorization = "Bearer " + store.getters.token;
+    }else{
+        config.headers.Authorization = "Bearer " + '';
     }
     return config;
 }, function (error) {
