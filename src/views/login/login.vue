@@ -36,7 +36,9 @@
                     登录
                 </van-button>
             </div>
-            <div class="bottom-link"><a target="_blank" href="http://welcome.cug.edu.cn/yx/api/toStudentRoomInfo">个人住宿查询</a></div>
+            <div class="bottom-link">
+                <router-link to="/search">个人住宿查询</router-link>
+            </div>
         </div>
     </div>
 </template>

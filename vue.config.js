@@ -1,6 +1,7 @@
 // const target='http://localhost:9090/yx';
 // const target='http://192.168.0.179:8090';
 const target='http://192.168.0.179:8090';
+// const target2='http://202.114.207.128';
 
 // const target='http://localhost:9090';
 module.exports = {
@@ -24,9 +25,8 @@ module.exports = {
         changeOrigin: true,
         pathRewrite: {
           '^/proxy': ''
-
         }
-      },
+      }
     },
   }
 };

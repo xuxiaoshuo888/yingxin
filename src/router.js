@@ -69,6 +69,11 @@ export default new Router({
             path: '/safe',
             name: 'safe',
             component: () => import('./views/safe/safe.vue')
+        },
+        {
+            path: '/search',
+            name: 'search',
+            component: () => import('./views/search/search.vue')
         }
     ]
 })
