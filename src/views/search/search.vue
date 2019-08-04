@@ -49,6 +49,7 @@
                 <van-cell title="班级" :value="info.bj" icon="location-o"/>
                 <van-cell title="当前寝室" :value="info.fullname" icon="location-o"/>
             </van-cell-group>
+            
         </div>
     </div>
 </template>
