@@ -1,5 +1,7 @@
 # yingxin
 
+#地大迎新
+
 ## Project setup
 ```
 npm install
