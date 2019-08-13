@@ -82,6 +82,7 @@
                             console.log(res)
                             if (res.data.errcode == '0') {//学生身份
                                 // let info = JSON.stringify(res.data.data)
+                                console.log(res.data.data)
                                 let info = res.data.data
                                 this.$store.commit('setStdInfo', info)
                                 if (res.data.data.readflag === '0') {//未读

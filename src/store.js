@@ -6,8 +6,10 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
+        qjxx:{},
         token: Cookies.get('setToken') || '',
         stdInfo: Cookies.get('setStdInfo') || {},//用户基本信息
+        planList:[],//环节信息
     },
     getters: {
         token: state => state.token,
@@ -20,6 +22,7 @@ export default new Vuex.Store({
         },
         setStdInfo(state, data) {
             state.stdInfo = data
+            console.log(data)
             Cookies.set('setStdInfo', data)
         }
     },

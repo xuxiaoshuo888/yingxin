@@ -20,36 +20,26 @@
                 <div class="right-content">{{fellow}}</div>
 
             </div>
+            <!--<div style="padding: 30px 16px;">-->
+                <!--<van-slider-->
+                        <!--v-model="fellow"-->
+                        <!--active-color="#06BEBD"-->
+                        <!--bar-height="4px"-->
+                        <!--:max="max"-->
+                        <!--:min='min'-->
+                        <!--inactive-color="#A8B6C8">-->
+                    <!--&lt;!&ndash;                    <div slot="button" class="slider-button">{{ value }}</div>&ndash;&gt;-->
+                <!--</van-slider>-->
+            <!--</div>-->
             <div style="padding: 30px 16px;">
-                <van-slider
+                <el-slider
                         v-model="fellow"
-                        active-color="#06BEBD"
-                        bar-height="4px"
+                        :step="1"
                         :max="max"
-                        :min='min'
-                        inactive-color="#A8B6C8">
-                    <!--                    <div slot="button" class="slider-button">{{ value }}</div>-->
-                </van-slider>
+                        :min="min"
+                        show-stops>
+                </el-slider>
             </div>
-            <!--            <div v-if="currentChoose.name == '生源地贷款'" class="index-list-div" @click="onShow_bank">-->
-            <!--                <div>贷款银行</div>-->
-            <!--                <div>{{currentChoose_bank.name || '点击选取'}} ></div>-->
-            <!--            </div>-->
-            <!--            <van-cell-group>-->
-            <!--                <van-field-->
-            <!--                        v-model="code"-->
-            <!--                        center-->
-            <!--                        clearable-->
-            <!--                        label-align="left"-->
-            <!--                        input-align="right"-->
-            <!--                        label="回执验证码"-->
-            <!--                        placeholder="请输入验证码">-->
-            <!--                </van-field>-->
-            <!--            </van-cell-group>-->
-            <!--            <div class="index-list-div">-->
-            <!--                <div>金额</div>-->
-            <!--                <div>￥23321 ></div>-->
-            <!--            </div>-->
         </div>
         <!--<div class="info">-->
             <!--<div>温馨提示</div>-->
@@ -77,6 +67,8 @@
                     title="到达时间"
                     @confirm="confirm_datetime"
                     @change="formatTime"
+                    :min-date="minDate"
+                    :max-date="maxDate"
             />
         </van-popup>
         <!--        到达站点-->
@@ -117,6 +109,8 @@
                 max: 10,
                 min: 0,
                 title: '抵校登记',
+                minDate: new Date(2019, 7, 20, 0, 0),
+                maxDate: new Date(2019, 8, 30, 23, 59),
                 // chooseList: [//缓交方式
                 //     {name: '国家助学贷款'},
                 //     {name: '生源地贷款'},

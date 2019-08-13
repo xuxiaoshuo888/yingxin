@@ -17,7 +17,7 @@ const instance = axios.create({
 
 // 添加请求拦截器
 instance.interceptors.request.use(function (config) {
-    console.log(config)
+    // console.log(config)
     // if(config.url == 'http://202.114.207.128/yx/api/getStudentRoomInfo'){
     //     config.baseURL = ''
     // }

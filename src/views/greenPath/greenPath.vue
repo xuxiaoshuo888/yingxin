@@ -6,13 +6,13 @@
                 <div class="left-head">缓交方式</div>
                 <div class="right-content">{{type || '点击选取'}} ›</div>
             </div>
-            <div v-if="type == '办理生源地贷款'" class="index-list-div" @click="onShow_bank">
+            <div v-if="type == '拟办校园地助学贷款'" class="index-list-div" @click="onShow_bank">
                 <div>贷款银行</div>
                 <div>{{bank || '点击选取'}} ›</div>
             </div>
             <van-cell-group>
                 <van-field
-                        v-if="type == '办理生源地贷款'"
+                        v-if="type == '拟办校园地助学贷款'"
                         v-model="code"
                         center
                         clearable
@@ -43,14 +43,14 @@
             />
             <!--贷款银行-->
             <van-actionsheet
-                    v-if="type == '办理生源地贷款'"
+                    v-if="type == '拟办校园地助学贷款'"
                     v-model="show_bank"
                     :actions="banList"
                     cancel-text="取消"
                     @select="onSelectBank"
             />
             <!---->
-            <van-cell-group v-if="type == '办理生源地贷款'">
+            <van-cell-group v-if="type == '拟办校园地助学贷款'">
                 <van-field
                         v-model="reason"
                         label="原因"
@@ -62,7 +62,8 @@
             </van-cell-group>
         </div>
         <div class="info">
-            <div>温馨提示</div>
+            <div class="indent0">温馨提示</div>
+            <div>国家政策要求所有学生应当按时缴纳学杂费，对于报到时未筹足学费与住宿费的新生，可申请办理助学贷款用于缴纳学费与住宿费，并申请通过“绿色通道”办理入学报到注册。</div>
             <div>（1）助学贷款分为生源地助学贷款和校园地助学贷款，详见《入学须知》。生源地助学贷款为信用贷款，不受名额限制，申请手续简便，放款快，还款方便，推荐优先办理生源地助学贷款。若错过办理生源地助学贷款，可在入学后办理校园地助学贷款（办理时间关注学工处学生资助中心通知）。</div>
             <div>（2）助学贷款待经办银行放款后，学校财务处将统一进行学费和住宿费的扣缴工作，如有余额，打入学生个人中国银行卡账户。</div>
             <div>（3）学生申请助学贷款最高金额为8000元/年，若学费和住宿费高于8000元，请学生登录校园统一支付平台（http://pay.cug.edu.cn/xysf/）自助缴纳高出部分，助学贷款仅限于缴纳学费和住宿费，新生还需缴纳代收费（一卡通生活费、体检费等），请自行登录校园统一支付平台缴纳。</div>
@@ -93,14 +94,10 @@
                 bank: '',//当前选中的银行
                 type: '',//当前选中的缓交方式
                 chooseList: [//缓交方式
-                    {name: '国家助学贷款'},
-                    {name: '生源地贷款'},
-                    {name: '其他'}
+
                 ],
                 banList: [
-                    {name: '招商银行', id: ''},
-                    {name: '建设银行', id: ''},
-                    {name: '中国银行', id: ''}
+
                 ],
                 yzm: '回执验证码',
                 je:'',
@@ -150,6 +147,11 @@
                 this.$ajax.get('/green_channel_api/lorn').then(res => {
                     this.$toast.clear()
                     this.myInfo = res.data.data[0]
+                    this.je = res.data.data[0].sqje || ''//金额
+                    this.type = res.data.data[0].type//缓交方式
+                    this.code = res.data.data[0].loancode//回执验证码
+                    this.reason = res.data.data[0].remark//原因
+                    this.bank = res.data.data[0].loanyh
                 })
             },
             save() {//保存绿色通道信息信息
@@ -157,7 +159,8 @@
                     amount:this.je,
                     bankName:this.bank,
                     loanCode:this.code,
-                    remark:this.reason
+                    remark:this.reason,
+                    type: this.type
                 }).then(res => {
                     this.$toast(res.data.data)
                 })

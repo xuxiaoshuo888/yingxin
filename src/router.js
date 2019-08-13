@@ -74,6 +74,16 @@ export default new Router({
             path: '/search',
             name: 'search',
             component: () => import('./views/search/search.vue')
+        },
+        {
+            path: '/complete',
+            name: 'complete',
+            component: () => import('./views/complete/complete.vue')
+        },
+        {
+            path: '/complete/qj',
+            name: 'qj',
+            component: () => import('./views/complete/qj.vue')
         }
     ]
 })

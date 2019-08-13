@@ -41,20 +41,10 @@
         name: "desk",
         data() {
             return {
-                xm:"",
+                xm: "",
                 bg: 'blue',
                 title: '自助迎新',
-                list: [
-                    // {name: '缴纳学杂费', icon: '@/assets/img/1.png', flag: true, path: '/fees'},
-                    // {name: '选宿舍', icon: '@/assets/img/2.png', flag: false, path: '/room'},
-                    // {name: '绿色通道', icon: '@/assets/img/3.png', flag: false, path: '/greenPath'},
-                    // {name: '一卡通充值', icon: '@/assets/img/4.png', flag: true, path: '/card'},
-                    // {name: '购买生活用品', icon: '@/assets/img/5.png', flag: true},
-                    // {name: '军训服装', icon: '@/assets/img/6.png', flag: true, path: '/clothes'},
-                    // {name: '个人信息', icon: '@/assets/img/7.png', flag: true},
-                    // {name: '户口迁移', icon: '@/assets/img/8.png', flag: true},
-                    // {name: '抵校登记', icon: '@/assets/img/9.png', flag: true, path: '/regist'}
-                ],
+                list: [],
                 planList: []
             }
         },
@@ -97,13 +87,16 @@
                     case 'aqjy'://安全教育
                         this.$router.push('/safe');
                         break;
+                    case 'bdd'://完成注册
+                        this.$router.push('/complete');
+                        break;
                 }
             },
             getHj() {//获取环节信息
                 // console.log(this.$store.state.stdInfo)
                 this.xm = this.$store.state.stdInfo.xm
-                let planId = this.$store.state.stdInfo.planid
-                let studentId = this.$store.state.stdInfo.studentid
+                let planId = this.$store.getters.stdInfo.planid
+                let studentId = this.$store.getters.stdInfo.studentid
                 this.$ajax.get('/plan_step_api/steps', {
                     params: {
                         planId: planId,
@@ -112,6 +105,7 @@
                 }).then(res => {
                     this.$toast.clear()
                     this.planList = res.data.data
+                    this.$store.state.planList = res.data.data
                 })
             },
             getConfig() {//测试

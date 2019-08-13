@@ -9,6 +9,10 @@
                 </div>
             </div>
         </div>
+        <div class="info">
+            <div class="indent0">温馨提示</div>
+          <div>到校后持校园一卡通和一寸照片（一张）到所在楼栋办理登记入住手续。填写文明住宿公约，录入一卡通信息，领取宿舍钥匙。</div>
+        </div>
         <!--<div class="fixed-bottom">-->
             <!--<div class="btn-contain">-->
                 <!--<van-button type="default" plain size="large" @click="toRoomList">-->
