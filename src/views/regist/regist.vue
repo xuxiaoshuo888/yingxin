@@ -148,7 +148,7 @@
                 this.way = value
                 this.show_way = false
             },
-            cancel_way(){
+            cancel_way() {
                 this.show_way = false
             },
             onShow_datetime() {
@@ -157,7 +157,7 @@
             confirm_datetime() {
                 this.show_time = false
             },
-            cancel_datetime(){
+            cancel_datetime() {
                 this.show_time = false
             },
             onshow_station() {
@@ -167,7 +167,7 @@
                 this.station = value
                 this.show_station = false
             },
-            cancel_station(){
+            cancel_station() {
                 this.show_station = false
             },
             getTime() {
@@ -177,6 +177,18 @@
                 let day = t.getDate();
                 let hour = t.getHours();
                 let minute = t.getMinutes();
+                if (month >= 1 && month <= 9) {
+                    month = "0" + month;
+                }
+                if (day >= 0 && day <= 9) {
+                    day = "0" + day;
+                }
+                if (hour >= 0 && hour <= 9) {
+                    hour = "0" + hour;
+                }
+                if (minute >= 0 && minute <= 9) {
+                    minute = "0" + minute;
+                }
                 let dateTime = `${year}-${month}-${day} ${hour}:${minute}`
                 console.log(dateTime)
                 this.arriveTime = dateTime;
@@ -218,7 +230,7 @@
                 this.arriveTime = `${endTimeArr[0]}-${endTimeArr[1]}-${endTimeArr[2]} ${endTimeArr[3]}:${endTimeArr[4]}`
             },
             submit() {
-                if (this.station && this.arriveTime && this.fellow && this.way) {
+                if (this.station && this.arriveTime && this.way) {
                     this.$ajax.post('/arrive_api/save', {
                         arriveStation: this.station,
                         arriveTime: this.arriveTime,

@@ -497,9 +497,10 @@
                         <el-form-item label="宗教信仰" prop="mzxxzjxy">
                             <el-input v-model="Info.mzxxzjxy"></el-input>
                         </el-form-item>
-                        <el-form-item label="班长" prop="mzxxbz">
-                            <el-input v-model="Info.mzxxbz"></el-input>
-                        </el-form-item>
+                        <!--删除-->
+                        <!--<el-form-item label="班长" prop="mzxxbz">-->
+                            <!--<el-input v-model="Info.mzxxbz"></el-input>-->
+                        <!--</el-form-item>-->
                     </div>
                 </el-form>
             </el-tab-pane>
@@ -652,8 +653,7 @@
                     tyxxsfrt: [{required: true, message: "必填", trigger: "change"}],
                     tyxxrtsj: [{required: true, message: "必填", trigger: "change"}],
                     tyxxsfkjjsx: [{required: true, message: "必填", trigger: "change"}],
-                    tyxxrtjsr: [{required: true, message: "必填", trigger: "change"}],
-                    tyxxrtlxrdh: [{required: true, message: "必填", trigger: "change"}]
+                    tyxxrtjsr: [{required: true, message: "必填", trigger: "change"}]
                 },
                 rule_dyxx: {//党员信息
                     dyxxsfrd: [{required: true, message: "必填", trigger: "change"}],
@@ -668,8 +668,7 @@
                     mzxxcrjzjlx: [{required: true, message: "必填", trigger: "change"}],
                     mzxxcrjzjh: [{required: true, message: "必填", trigger: "change"}],
                     mzxxcrjyxq: [{required: true, message: "必填", trigger: "change"}],
-                    mzxxzjxy: [{required: true, message: "必填", trigger: "change"}],
-                    mzxxbz: [{required: true, message: "必填", trigger: "change"}]
+                    mzxxzjxy: [{required: true, message: "必填", trigger: "change"}]
                 },
                 rule_jjlxr: {//紧急联系人
                     jjxm: [{required: true, message: "必填", trigger: "change"}],
