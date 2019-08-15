@@ -21,15 +21,15 @@
 
             </div>
             <!--<div style="padding: 30px 16px;">-->
-                <!--<van-slider-->
-                        <!--v-model="fellow"-->
-                        <!--active-color="#06BEBD"-->
-                        <!--bar-height="4px"-->
-                        <!--:max="max"-->
-                        <!--:min='min'-->
-                        <!--inactive-color="#A8B6C8">-->
-                    <!--&lt;!&ndash;                    <div slot="button" class="slider-button">{{ value }}</div>&ndash;&gt;-->
-                <!--</van-slider>-->
+            <!--<van-slider-->
+            <!--v-model="fellow"-->
+            <!--active-color="#06BEBD"-->
+            <!--bar-height="4px"-->
+            <!--:max="max"-->
+            <!--:min='min'-->
+            <!--inactive-color="#A8B6C8">-->
+            <!--&lt;!&ndash;                    <div slot="button" class="slider-button">{{ value }}</div>&ndash;&gt;-->
+            <!--</van-slider>-->
             <!--</div>-->
             <div style="padding: 30px 16px;">
                 <el-slider
@@ -42,9 +42,9 @@
             </div>
         </div>
         <!--<div class="info">-->
-            <!--<div>温馨提示</div>-->
-            <!--<div>1.缴纳学杂费前先开通建设银行网银。</div>-->
-            <!--<div>2.请按照页面显示的步骤先后完成报到。</div>-->
+        <!--<div>温馨提示</div>-->
+        <!--<div>1.缴纳学杂费前先开通建设银行网银。</div>-->
+        <!--<div>2.请按照页面显示的步骤先后完成报到。</div>-->
         <!--</div>-->
         <div class="btn-contain">
             <van-button type="info" size="large" class="button-bg" @click="submit">
@@ -58,6 +58,7 @@
                     title="交通方式"
                     :columns="ways"
                     @confirm="confirm_way"
+                    @cancel="cancel_way"
             />
         </van-popup>
         <!--到达时间-->
@@ -66,6 +67,7 @@
                     type="datetime"
                     title="到达时间"
                     @confirm="confirm_datetime"
+                    @cancel="cancel_datetime"
                     @change="formatTime"
                     :min-date="minDate"
                     :max-date="maxDate"
@@ -78,6 +80,7 @@
                     title="达到站点"
                     :columns="stations"
                     @confirm="confirm_station"
+                    @cancel="cancel_station"
             />
         </van-popup>
     </div>
@@ -145,10 +148,16 @@
                 this.way = value
                 this.show_way = false
             },
+            cancel_way(){
+                this.show_way = false
+            },
             onShow_datetime() {
                 this.show_time = true
             },
             confirm_datetime() {
+                this.show_time = false
+            },
+            cancel_datetime(){
                 this.show_time = false
             },
             onshow_station() {
@@ -157,6 +166,20 @@
             confirm_station(value) {
                 this.station = value
                 this.show_station = false
+            },
+            cancel_station(){
+                this.show_station = false
+            },
+            getTime() {
+                let t = new Date()
+                let year = t.getFullYear();
+                let month = t.getMonth() + 1;
+                let day = t.getDate();
+                let hour = t.getHours();
+                let minute = t.getMinutes();
+                let dateTime = `${year}-${month}-${day} ${hour}:${minute}`
+                console.log(dateTime)
+                this.arriveTime = dateTime;
             },
             getInfo() {//获取学生到校信息
                 this.$ajax.get('/arrive_api/arrive_info').then(res => {
@@ -192,7 +215,7 @@
             },
             formatTime(e) {
                 let endTimeArr = e.getValues();//["2019", "03", "22", "17", "28"]
-                this.arriveTime = `${endTimeArr[0]}-${endTimeArr[1]}-${endTimeArr[2]}  ${endTimeArr[3]}:${endTimeArr[4]}`
+                this.arriveTime = `${endTimeArr[0]}-${endTimeArr[1]}-${endTimeArr[2]} ${endTimeArr[3]}:${endTimeArr[4]}`
             },
             submit() {
                 if (this.station && this.arriveTime && this.fellow && this.way) {
@@ -210,6 +233,7 @@
             }
         },
         mounted() {
+            this.getTime()
             this.getInfo()
             this.getWay()
             this.getStation()

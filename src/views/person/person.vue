@@ -272,8 +272,8 @@
                                 <el-radio label="否"></el-radio>
                             </el-radio-group>
                         </el-form-item>
-                        <el-form-item label="残疾类型" prop="hkxz">
-                            <el-select v-model="Info.hkxz">
+                        <el-form-item label="残疾类型" prop="cjlx">
+                            <el-select v-model="Info.cjlx">
                                 <el-option
                                         v-for="item in disabilities"
                                         :label="item.codeitemname"
@@ -323,9 +323,10 @@
                 </el-form>
             </el-tab-pane>
             <el-tab-pane label="直系家庭成员" name="5">
-                <div>
+                <div style="text-align: center;">
                     父母和未结婚的兄弟姐妹
-                    <i class="el-icon-circle-plus" type="primary" @click="addFamily"></i>
+                    <i class="el-icon-circle-plus" type="primary" style="font-size: 20px;vertical-align: middle;"
+                       @click="addFamily"></i>
                 </div>
                 <el-carousel
                         :interval="5000"
@@ -373,9 +374,10 @@
                 </el-carousel>
             </el-tab-pane>
             <el-tab-pane label="主要社会关系" name="6">
-                <div>
+                <div style="text-align: center;">
                     其他
-                    <i class="el-icon-circle-plus" type="primary" @click="addRelatives"></i>
+                    <i class="el-icon-circle-plus" type="primary" style="font-size: 20px;vertical-align: middle;"
+                       @click="addRelatives"></i>
                 </div>
                 <el-carousel :interval="5000" arrow="always" :loop="loop" height="400px">
                     <el-carousel-item v-for="(item,index) in Info.relatives" :key="index">
@@ -423,7 +425,8 @@
                     </el-form-item>
                     <div v-if="Info.tyxxsfrt == '是'">
                         <el-form-item label="入团时间" prop="tyxxrtsj">
-                            <el-date-picker type="date" v-model="Info.tyxxrtsj"></el-date-picker>
+                            <el-date-picker type="date" value-format="yyyy-MM-dd"
+                                            v-model="Info.tyxxrtsj"></el-date-picker>
                         </el-form-item>
                         <el-form-item label="是否开具团组织介绍信" prop="tyxxsfkjjsx">
                             <el-radio-group v-model="Info.tyxxsfkjjsx">
@@ -450,24 +453,29 @@
                     </el-form-item>
                     <div v-if="Info.dyxxsfrd == '是'">
                         <el-form-item label="入党时间" prop="dyxxrdsj">
-                            <el-date-picker type="date" v-model="Info.dyxxrdsj"></el-date-picker>
+                            <el-date-picker type="date" value-format="yyyy-MM-dd"
+                                            v-model="Info.dyxxrdsj"></el-date-picker>
                         </el-form-item>
                         <el-form-item label="发展时间" prop="dyxxfzsj">
-                            <el-date-picker type="date" v-model="Info.dyxxfzsj"></el-date-picker>
+                            <el-date-picker type="date" value-format="yyyy-MM-dd"
+                                            v-model="Info.dyxxfzsj"></el-date-picker>
                         </el-form-item>
                         <el-form-item label="入党积极分子时间" prop="dyxxrdjjfzsj">
-                            <el-date-picker type="date" v-model="Info.dyxxrdjjfzsj"></el-date-picker>
+                            <el-date-picker type="date" value-format="yyyy-MM-dd"
+                                            v-model="Info.dyxxrdjjfzsj"></el-date-picker>
                         </el-form-item>
                         <el-form-item label="转正时间" prop="dyxxzjsj">
-                            <el-date-picker type="date" v-model="Info.dyxxzjsj"></el-date-picker>
+                            <el-date-picker type="date" value-format="yyyy-MM-dd"
+                                            v-model="Info.dyxxzjsj"></el-date-picker>
                         </el-form-item>
                         <el-form-item label="党校结业时间" prop="dyxxdxjysj">
-                            <el-date-picker type="date" v-model="Info.dyxxdxjysj"></el-date-picker>
+                            <el-date-picker type="date" value-format="yyyy-MM-dd"
+                                            v-model="Info.dyxxdxjysj"></el-date-picker>
                         </el-form-item>
                     </div>
                 </el-form>
             </el-tab-pane>
-            <el-tab-pane v-if="Info.mz == '汉族'" label="民族生信息" name="9">
+            <el-tab-pane v-if="Info.mz !== '汉族'" label="民族生信息" name="9">
                 <el-form label-position="top" size="mini" ref="form_mzsxx" :rules="rule_mzsxx" :model="Info">
                     <el-form-item label="是否有办出入证件" prop="mzxxsfybcrzj">
                         <el-radio-group v-model="Info.mzxxsfybcrzj">
@@ -483,7 +491,8 @@
                             <el-input v-model="Info.mzxxcrjzjh"></el-input>
                         </el-form-item>
                         <el-form-item label="出入境证件有效期" prop="mzxxcrjyxq">
-                            <el-date-picker type="date" v-model="Info.mzxxcrjyxq"></el-date-picker>
+                            <el-date-picker type="date" value-format="yyyy-MM-dd"
+                                            v-model="Info.mzxxcrjyxq"></el-date-picker>
                         </el-form-item>
                         <el-form-item label="宗教信仰" prop="mzxxzjxy">
                             <el-input v-model="Info.mzxxzjxy"></el-input>
@@ -628,7 +637,7 @@
                     sfjtzctfywsj: [{required: true, message: "必填", trigger: "change"}],
                     tfywsjms: [{required: true, message: "必填", trigger: "change"}],
                     sfcj: [{required: true, message: "必填", trigger: "change"}],
-                    hkxz: [{required: true, message: "必填", trigger: "change"}],
+                    cjlx: [{required: true, message: "必填", trigger: "change"}],
                     sfdfrjt: [{required: true, message: "必填", trigger: "change"}],
                     jtzysrly: [{required: true, message: "必填", trigger: "change"}],
                     jtldlrks: [{required: true, message: "必填", trigger: "change"}],
@@ -685,6 +694,10 @@
             handleClick(tab) {
                 //切换tab,则保存一次
                 this.activeName = tab.name;
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                })
                 this.save();
             },
             getDetail() {
@@ -754,7 +767,11 @@
             },
             prevStep() {
                 let temp = Number(this.activeName);
-                temp = temp - 1;
+                if (this.Info.mz == '汉族' && temp == 10) {
+                    temp = temp - 2;
+                } else {
+                    temp = temp - 1;
+                }
                 this.activeName = String(temp);
                 this.save();
                 window.scrollTo({
@@ -764,7 +781,11 @@
             },
             nextStep() {
                 let temp = Number(this.activeName);
-                temp = temp + 1;
+                if (this.Info.mz == '汉族' && temp == 8) {
+                    temp = temp + 2;
+                } else {
+                    temp = temp + 1;
+                }
                 this.activeName = String(temp);
                 this.save();
                 window.scrollTo({
@@ -790,42 +811,46 @@
                     if (valid) {//继续提交
                         xsxx = true
                     } else {//终止提交，并提示
-                        return xsxx = false;
+                        xsxx = false;
                     }
                 });
                 this.$refs['form_knrd'].validate((valid) => {//家庭信息
                     if ((this.Info.sfpkjt == '是' && valid) || this.Info.sfpkjt == '否') {
                         jtxx = true
                     } else {
-                        return jtxx = false;
+                        jtxx = false;
                     }
                 });
                 this.$refs['form_tyxx'].validate((valid) => {//团员信息
                     if ((this.Info.tyxxsfrt == '是' && valid) || this.Info.tyxxsfrt == '否') {
                         tyxx = true
                     } else {
-                        return tyxx = false;
+                        tyxx = false;
                     }
                 });
                 this.$refs['form_dyxx'].validate((valid) => {//党员员信息
                     if ((this.Info.dyxxsfrd == '是' && valid) || this.Info.dyxxsfrd == '否') {
                         dyxx = true
                     } else {
-                        return dyxx = false;
+                        dyxx = false;
                     }
                 });
-                this.$refs['form_mzsxx'].validate((valid) => {//民族生信息
-                    if ((this.Info.mzxxsfybcrzj == '是' && valid) || this.Info.mzxxsfybcrzj == '否') {
-                        mzsxx = true
-                    } else {
-                        return mzsxx = false;
-                    }
-                });
+                if (this.Info.mz !== '汉族') {//非汉族
+                    this.$refs['form_mzsxx'].validate((valid) => {//民族生信息
+                        if ((this.Info.mzxxsfybcrzj == '是' && valid) || this.Info.mzxxsfybcrzj == '否') {
+                            mzsxx = true
+                        } else {
+                            mzsxx = false;
+                        }
+                    });
+                } else {
+                    mzsxx = true
+                }
                 this.$refs['form_jjlxr'].validate((valid) => {//紧急联系人
                     if (valid) {
                         jjlxr = true
                     } else {
-                        return jjlxr = false;
+                        jjlxr = false;
                     }
                 });
                 console.log(xsxx)

@@ -6,13 +6,13 @@
                 <div class="left-head">缓交方式</div>
                 <div class="right-content">{{type || '点击选取'}} ›</div>
             </div>
-            <div v-if="type == '拟办校园地助学贷款'" class="index-list-div" @click="onShow_bank">
+            <div v-if="type == '已办理生源地贷款'" class="index-list-div" @click="onShow_bank">
                 <div>贷款银行</div>
                 <div>{{bank || '点击选取'}} ›</div>
             </div>
             <van-cell-group>
                 <van-field
-                        v-if="type == '拟办校园地助学贷款'"
+                        v-if="type == '已办理生源地贷款'"
                         v-model="code"
                         center
                         clearable
@@ -43,14 +43,14 @@
             />
             <!--贷款银行-->
             <van-actionsheet
-                    v-if="type == '拟办校园地助学贷款'"
+                    v-if="type == '已办理生源地贷款'"
                     v-model="show_bank"
                     :actions="banList"
                     cancel-text="取消"
                     @select="onSelectBank"
             />
             <!---->
-            <van-cell-group v-if="type == '拟办校园地助学贷款'">
+            <van-cell-group v-if="type == '已办理生源地贷款'">
                 <van-field
                         v-model="reason"
                         label="原因"
@@ -122,6 +122,7 @@
             },
             onSelect(e) {
                 this.type = e.name
+                console.log(this.type)
                 this.show = false
             },
             onSelectBank(e) {

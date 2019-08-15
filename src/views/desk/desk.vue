@@ -7,13 +7,15 @@
                     <div class="name">{{xm}}</div>
                     <div class="notice">欢迎你，请完成填写！</div>
                 </div>
-                <img class="potrait" src="@/assets/img/Photo.png" alt="">
+                <img class="potrait" src="@/assets/img/user1.png" alt="">
             </div>
             <div class="index-list-div" @click="toDetail(item.stepid)" v-for="(item,index) in planList" :key="index">
                 <div>{{item.stepname}}
                     <!--<van-icon class="state-icon" :name="item.flag ? 'checked' : 'info'"></van-icon>-->
-                    <img class="state-icon" v-if="item.status === '1'" src="@/assets/img/right.png" alt="">
-                    <img class="state-icon" v-else src="@/assets/img/warn.png" alt="">
+                    <span v-if="item.ismust == '1'">
+                        <img class="state-icon" v-if="item.status === '1'" src="@/assets/img/right.png" alt="">
+                        <img class="state-icon" v-else src="@/assets/img/warn.png" alt="">
+                    </span>
                 </div>
                 <img v-if="index == 0" src="../../assets/img/1.png">
                 <img v-else-if="index == 1" src="../../assets/img/8.png">

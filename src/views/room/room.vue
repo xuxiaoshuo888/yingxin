@@ -5,20 +5,20 @@
             <div class="band">
                 <div class="title1">当前选择</div>
                 <div class="title2">
-                    <img src="@/assets/img/2.png" alt="">&nbsp;&nbsp;&nbsp;<span>{{room.aptzone}}校区-{{room.apartment}}栋-{{room.floor}}-{{room.bedroom}}室-{{room.bedid}}床</span>
+                    <img src="@/assets/img/2.png" alt="">&nbsp;&nbsp;&nbsp;<span>{{room || '暂无数据'}}</span>
                 </div>
             </div>
         </div>
         <div class="info">
             <div class="indent0">温馨提示</div>
-          <div>到校后持校园一卡通和一寸照片（一张）到所在楼栋办理登记入住手续。填写文明住宿公约，录入一卡通信息，领取宿舍钥匙。</div>
+            <div>到校后持校园一卡通和一寸照片（一张）到所在楼栋办理登记入住手续。填写文明住宿公约，录入一卡通信息，领取宿舍钥匙。住宿服务电话：027-67886401</div>
         </div>
         <!--<div class="fixed-bottom">-->
-            <!--<div class="btn-contain">-->
-                <!--<van-button type="default" plain size="large" @click="toRoomList">-->
-                    <!--重新选择-->
-                <!--</van-button>-->
-            <!--</div>-->
+        <!--<div class="btn-contain">-->
+        <!--<van-button type="default" plain size="large" @click="toRoomList">-->
+        <!--重新选择-->
+        <!--</van-button>-->
+        <!--</div>-->
         <!--</div>-->
     </div>
 </template>
@@ -38,7 +38,7 @@
             return {
                 bg: 'blue',
                 title: '选择宿舍',
-                room:'',//当前宿舍信息
+                room: '',//当前宿舍信息
             }
         },
         methods: {
@@ -47,28 +47,30 @@
             },
             //获取学生的住宿信息
             getStep() {
-                this.$ajax.get('/dorm_api/dorm_info').then(res => {
-                    this.room = res.data.data
+                let xh = this.$store.getters.stdInfo.xh;
+                let sfzh = this.$store.getters.stdInfo.sfzh;
+                let mm = sfzh.toUpperCase().substring(sfzh.length - 6)
+                this.$ajax.post('/dorm_api/room_info',
+                    {
+                        username: xh,
+                        card: mm
+                    }).then(res => {
+                    if (res.data.errcode == '0') {
+                        this.room = res.data.data.fullname
+                    } else {
+                        this.$Toast(res.data.errmsg)
+                    }
+                }).catch(err => {
+                    this.$toast(JSON.stringify(err))
                 })
             },
-            // getGongyu() {//公寓信息
-            //     this.$ajax.get('/dorm_api/apartments').then(res => {
-            //         console.log(res.data)
-            //     })
-            // },
-            // getStep() {
-            //     this.$ajax.get('/dorm_api/dorm_info').then(res => {
-            //         console.log(res.data)
-            //     })
-            // },
-            // getStep() {
-            //     this.$ajax.get('/dorm_api/dorm_info').then(res => {
-            //         console.log(res.data)
-            //     })
-            // }
+            comfirm() {
+                this.$ajax.post('/dorm_api/save_record', {stepId: 'room'})
+            }
         },
         mounted() {
             this.getStep()
+            this.comfirm()
         }
     }
 </script>

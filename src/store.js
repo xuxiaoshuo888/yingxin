@@ -6,14 +6,15 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
-        qjxx:{},
+        qjxx: {},
         token: Cookies.get('setToken') || '',
         stdInfo: Cookies.get('setStdInfo') || {},//用户基本信息
-        planList:[],//环节信息
+        planList: [],//环节信息
     },
     getters: {
         token: state => state.token,
-        stdInfo: state => state.stdInfo
+        stdInfo: state => state.stdInfo,
+        planList: state => state.planList
     },
     mutations: {
         setToken(state, data) {

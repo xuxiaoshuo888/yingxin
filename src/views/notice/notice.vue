@@ -7,7 +7,7 @@
                     <div class="name">{{xm}}</div>
                     <div class="notice">欢迎你，请完成填写！</div>
                 </div>
-                <img class="potrait" src="@/assets/img/Photo.png" alt="">
+                <img class="potrait" src="@/assets/img/user1.png" alt="">
             </div>
             <div class="notice">
                 <p><span style="color: red;">*</span>注意事项</p>
