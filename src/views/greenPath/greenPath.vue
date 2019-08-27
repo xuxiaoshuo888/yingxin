@@ -15,7 +15,6 @@
                         v-if="type == '已办理生源地贷款'"
                         v-model="code"
                         center
-                        type="number"
                         clearable
                         label-align="left"
                         input-align="right"
