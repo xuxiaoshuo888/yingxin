@@ -15,6 +15,7 @@
                         v-if="type == '已办理生源地贷款'"
                         v-model="code"
                         center
+                        type="number"
                         clearable
                         label-align="left"
                         input-align="right"
@@ -64,9 +65,13 @@
         <div class="info">
             <div class="indent0">温馨提示</div>
             <div>国家政策要求所有学生应当按时缴纳学杂费，对于报到时未筹足学费与住宿费的新生，可申请办理助学贷款用于缴纳学费与住宿费，并申请通过“绿色通道”办理入学报到注册。</div>
-            <div>（1）助学贷款分为生源地助学贷款和校园地助学贷款，详见《入学须知》。生源地助学贷款为信用贷款，不受名额限制，申请手续简便，放款快，还款方便，推荐优先办理生源地助学贷款。若错过办理生源地助学贷款，可在入学后办理校园地助学贷款（办理时间关注学工处学生资助中心通知）。</div>
+            <div>
+                （1）助学贷款分为生源地助学贷款和校园地助学贷款，详见《入学须知》。生源地助学贷款为信用贷款，不受名额限制，申请手续简便，放款快，还款方便，推荐优先办理生源地助学贷款。若错过办理生源地助学贷款，可在入学后办理校园地助学贷款（办理时间关注学工处学生资助中心通知）。
+            </div>
             <div>（2）助学贷款待经办银行放款后，学校财务处将统一进行学费和住宿费的扣缴工作，如有余额，打入学生个人中国银行卡账户。</div>
-            <div>（3）学生申请助学贷款最高金额为8000元/年，若学费和住宿费高于8000元，请学生登录校园统一支付平台（http://pay.cug.edu.cn/xysf/）自助缴纳高出部分，助学贷款仅限于缴纳学费和住宿费，新生还需缴纳代收费（一卡通生活费、体检费等），请自行登录校园统一支付平台缴纳。</div>
+            <div>
+                （3）学生申请助学贷款最高金额为8000元/年，若学费和住宿费高于8000元，请学生登录校园统一支付平台（http://pay.cug.edu.cn/xysf/）自助缴纳高出部分，助学贷款仅限于缴纳学费和住宿费，新生还需缴纳代收费（一卡通生活费、体检费等），请自行登录校园统一支付平台缴纳。
+            </div>
         </div>
         <div class="btn-contain">
             <van-button type="info" size="large" class="button-bg" @click="save">
@@ -96,11 +101,9 @@
                 chooseList: [//缓交方式
 
                 ],
-                banList: [
-
-                ],
+                banList: [],
                 yzm: '回执验证码',
-                je:'',
+                je: '',
                 show: false,//控制缓交方式actionsheet展示与否
                 show_bank: false,//控制银行列表展示与否
                 code: '',//验证码
@@ -126,6 +129,7 @@
                 this.show = false
             },
             onSelectBank(e) {
+                console.log(e)
                 this.bank = e.name
                 this.show_bank = false
             },
@@ -156,13 +160,57 @@
                 })
             },
             save() {//保存绿色通道信息信息
-                this.$ajax.post('/green_channel_api/save', {
-                    amount:this.je,
-                    bankName:this.bank,
-                    loanCode:this.code,
-                    remark:this.reason,
-                    type: this.type
-                }).then(res => {
+                let data = {}
+                if (this.type) {
+                    console.log(1)
+                    if (this.type === '已办理生源地贷款') {
+                        //当缓交方式为：已办理生源地贷款的时候，需要验证回执码，
+                        if (!this.bank) {
+                            this.$toast('请选择贷款银行')
+                            return
+                        }
+                        if (!this.code) {
+                            this.$toast('请填写回执验证码')
+                            return
+                        }
+                        if (!this.je) {
+                            this.$toast('请填写金额')
+                            return
+                        }
+                        if (this.je && this.je <= 0) {
+                            this.$toast('填写金额大于0')
+                            return
+                        }
+                        if (!this.reason) {
+                            this.$toast('请填写原因')
+                            return
+                        }
+                        data = {
+                            amount: this.je,//金额
+                            bankName: this.bank,//银行
+                            loanCode: this.code,//回执验证码
+                            remark: this.reason,//原因
+                            type: this.type//缓交方式
+                        }
+                    } else if (this.type === '拟办校园地助学贷款') {
+                        if (!this.je) {
+                            this.$toast('请填写金额')
+                            return
+                        } else if (this.je && this.je <= 0) {
+                            this.$toast('填写金额大于0')
+                            return
+                        }
+                        let data = {
+                            amount: this.je,//金额
+                            type: this.type//缓交方式
+                        }
+                    }
+                } else {
+                    this.$toast('请选择缓交方式')
+                    return
+                }
+                console.log(data)
+                this.$ajax.post('/green_channel_api/save', data).then(res => {
                     this.$toast(res.data.data)
                 })
             }
@@ -189,7 +237,7 @@
         text-align: right !important;
     }
 
-    .van-field__body input{
+    .van-field__body input {
         text-align: right !important;
     }
 </style>
