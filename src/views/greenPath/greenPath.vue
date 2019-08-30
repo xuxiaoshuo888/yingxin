@@ -199,7 +199,7 @@
                             this.$toast('填写金额大于0')
                             return
                         }
-                        let data = {
+                        data = {
                             amount: this.je,//金额
                             type: this.type//缓交方式
                         }
