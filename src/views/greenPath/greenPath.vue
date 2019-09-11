@@ -35,14 +35,14 @@
             </van-cell-group>
             <!--            </div>-->
             <!--缓交方式-->
-            <van-actionsheet
+            <van-action-sheet
                     v-model="show"
                     :actions="chooseList"
                     cancel-text="取消"
                     @select="onSelect"
             />
             <!--贷款银行-->
-            <van-actionsheet
+            <van-action-sheet
                     v-if="type == '已办理生源地贷款'"
                     v-model="show_bank"
                     :actions="banList"
@@ -87,7 +87,7 @@
      * @Description: 绿色通道
      */
     import goBack from '@/components/goBack'
-    import {Actionsheet, Field} from 'vant'
+    // import {Actionsheet, Field} from 'vant'
 
     export default {
         name: "greenpath",
@@ -111,9 +111,7 @@
             }
         },
         components: {
-            goBack,
-            [Actionsheet.name]: Actionsheet,
-            [Field.name]: Field
+            goBack
         },
         methods: {
             onShow() {

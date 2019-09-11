@@ -93,7 +93,7 @@
      * @Description: 抵校登记
      */
     import goBack from '@/components/goBack'
-    import {Actionsheet, Slider, Picker, Popup} from 'vant'
+    // import {Actionsheet, Slider, Picker, Popup} from 'vant'
 
     export default {
         name: "regist",
@@ -135,10 +135,10 @@
         },
         components: {
             goBack,
-            [Actionsheet.name]: Actionsheet,
-            [Slider.name]: Slider,
-            [Picker.name]: Picker,
-            [Popup.name]: Popup
+            // [Actionsheet.name]: Actionsheet,
+            // [Slider.name]: Slider,
+            // [Picker.name]: Picker,
+            // [Popup.name]: Popup
         },
         methods: {
             onShow_way() {

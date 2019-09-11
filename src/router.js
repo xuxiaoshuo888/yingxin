@@ -26,6 +26,11 @@ export default new Router({
             component: () => import('./views/hcyhk/hcyhk.vue')
         },
         {
+            path: '/hcyhk/area',
+            name: 'area',
+            component: () => import('./views/hcyhk/area.vue')
+        },
+        {
             path: '/fees',
             name: 'fees',
             component: () => import('./views/fees/fees.vue')

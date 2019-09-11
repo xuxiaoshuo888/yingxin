@@ -96,12 +96,22 @@
                         <el-input type="number" v-model="Info.lxdh"></el-input>
                     </el-form-item>
                     <el-form-item label="生源地" prop="syd">
-                        <el-select v-model="Info.syd">
+                        <el-select v-model="Info.sydid" @change="chooseProvince">
                             <el-option
                                     v-for="item in province"
                                     :label="item.codeitemname"
                                     :key="item.codeitemid"
-                                    :value="item.codeitemname"
+                                    :value="item.codeitemid"
+                            ></el-option>
+                        </el-select>
+                    </el-form-item>
+                    <el-form-item label="籍贯" prop="jg">
+                        <el-select v-model="Info.jgid" @change="chooseJg">
+                            <el-option
+                                    v-for="item in jgList"
+                                    :label="item.codeitemname"
+                                    :key="item.codeitemid"
+                                    :value="item.codeitemid"
                             ></el-option>
                         </el-select>
                     </el-form-item>
@@ -135,9 +145,9 @@
                             ></el-option>
                         </el-select>
                     </el-form-item>
-                    <el-form-item label="户口所在地" prop="hkszd">
-                        <el-input v-model="Info.hkszd"></el-input>
-                    </el-form-item>
+                    <!--<el-form-item label="户口所在地" prop="hkszd">-->
+                    <!--<el-input :placeholder="Info.syd + Info.jg" disabled></el-input>-->
+                    <!--</el-form-item>-->
                     <el-form-item label="户口详细地址" prop="hkszdz">
                         <el-input v-model="Info.hkszdz"></el-input>
                     </el-form-item>
@@ -499,7 +509,7 @@
                         </el-form-item>
                         <!--删除-->
                         <!--<el-form-item label="班长" prop="mzxxbz">-->
-                            <!--<el-input v-model="Info.mzxxbz"></el-input>-->
+                        <!--<el-input v-model="Info.mzxxbz"></el-input>-->
                         <!--</el-form-item>-->
                     </div>
                 </el-form>
@@ -534,7 +544,7 @@
 
 <script>
     import goBack from "@/components/goBack";
-    import {Actionsheet, Slider, Picker, Popup} from "vant";
+    // import {Actionsheet, Slider, Picker, Popup} from "vant";
 
     export default {
         name: "person",
@@ -563,7 +573,8 @@
                 campus: [], //校区
                 household: [], //户口
                 marriages: [], //婚姻情况
-                province: [], //省份
+                province: [], //省份,生源地
+                jgList: [],//城市列表,籍贯
                 disabilities: [], //残疾类型
                 incomeSources: [], //收入来源
                 rules: {
@@ -607,10 +618,10 @@
                 rule_std: {//学生信息
                     lxdh: [{required: true, message: "请正确填写联系电话", trigger: "blur"}],
                     syd: [{required: true, message: "必填", trigger: "change"}],
+                    jg: [{required: true, message: "必填", trigger: "change"}],
                     hkxz: [{required: true, message: "必填", trigger: "change"}],
                     hjqk: [{required: true, message: "必填", trigger: "change"}],
                     xq: [{required: true, message: "必填", trigger: "change"}],
-                    hkszd: [{required: true, message: "必填", trigger: "change"}],
                     hkszdz: [{required: true, message: "必填", trigger: "change"}],
                     jtrks: [{required: true, message: "必填", trigger: "change"}],
                     nsr: [{required: true, message: "必填", trigger: "change"}],
@@ -681,10 +692,10 @@
         },
         components: {
             goBack,
-            [Actionsheet.name]: Actionsheet,
-            [Slider.name]: Slider,
-            [Picker.name]: Picker,
-            [Popup.name]: Popup
+            // [Actionsheet.name]: Actionsheet,
+            // [Slider.name]: Slider,
+            // [Picker.name]: Picker,
+            // [Popup.name]: Popup
         },
         methods: {
             onSubmit() {
@@ -703,6 +714,7 @@
                 //获取学生详情
                 this.$ajax.get("/student_api/student_detail").then(res => {
                     this.Info = res.data.data;
+                    this.getJglist(this.Info.sydid)
                     if (res.data.data.family.length == 0) {
                         this.addFamily();
                     }
@@ -713,6 +725,16 @@
             },
             getOptions() {
                 //获取选项
+                this.$ajax.get("/student_api/options").then(res => {
+                    this.campus = res.data.data.campus;
+                    this.household = res.data.data.household;
+                    this.marriages = res.data.data.marriages;
+                    this.province = res.data.data.province;
+                    this.disabilities = res.data.data.disabilities;
+                    this.incomeSources = res.data.data.incomeSources;
+                });
+            },
+            getGjlist() {//获取籍贯列表
                 this.$ajax.get("/student_api/options").then(res => {
                     this.campus = res.data.data.campus;
                     this.household = res.data.data.household;
@@ -903,6 +925,43 @@
                 //删除社会关系成员
                 this.Info.relatives.splice(index, 1);
                 this.$toast("删除成功！");
+            },
+            chooseProvince(e) {//生源地字段选择后的回调,记录sdyid,向后台请求城市列表
+                console.log(e)
+                let p = this.province
+                for (let i = 0; i < p.length; i++) {
+                    if (e === p[i].codeitemid) {
+                        this.Info.syd = p[i].codeitemname
+                        break
+                    }
+                }
+                this.Info.sydid = e;
+                this.Info.jgid = '';
+                this.getJglist(e)
+            },
+            getJglist(sydid) {
+                this.$ajax.get(`/student_api/city?itemId=${sydid}`).then(res => {
+                    if (res.data.errcode == '0') {
+                        this.jgList = res.data.data
+                    } else {
+                        this.$toast({
+                            type: 'fail',
+                            message: res.data.errmsg
+                        })
+                    }
+                })
+            },
+            chooseJg(e) {//字段选择后的回调,记录jgid
+                console.log(e)
+                this.jgid = e
+                let p = this.jgList
+                for (let i = 0; i < p.length; i++) {
+                    if (e === p[i].codeitemid) {
+                        this.Info.jg = p[i].codeitemname
+                        break
+                    }
+                }
+                this.Info.hkszd = this.Info.syd + this.Info.jg
             }
         },
         mounted() {
