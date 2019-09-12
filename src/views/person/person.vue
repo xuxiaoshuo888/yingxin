@@ -95,26 +95,43 @@
                     <el-form-item label="联系电话" prop="lxdh">
                         <el-input type="number" v-model="Info.lxdh"></el-input>
                     </el-form-item>
-                    <el-form-item label="生源地" prop="syd">
-                        <el-select v-model="Info.sydid" @change="chooseProvince">
-                            <el-option
-                                    v-for="item in province"
-                                    :label="item.codeitemname"
-                                    :key="item.codeitemid"
-                                    :value="item.codeitemid"
-                            ></el-option>
-                        </el-select>
+                    <el-form-item label="户口所在地" required>
+                            <el-col :span="11">
+                                <el-form-item prop="syd" style="padding-left: 0;">
+                                    <el-select v-model="Info.sydid" @change="chooseProvince">
+                                        <el-option
+                                                v-for="item in province"
+                                                :label="item.codeitemname"
+                                                :key="item.codeitemid"
+                                                :value="item.codeitemid"
+                                        ></el-option>
+                                    </el-select>
+                                </el-form-item>
+                            </el-col>
+                            <el-col :span="2">&nbsp;</el-col>
+                            <el-col :span="11">
+                                <el-form-item prop="jg" style="padding-right: 0;">
+                                    <el-select v-model="Info.jgid" @change="chooseJg">
+                                        <el-option
+                                                v-for="item in jgList"
+                                                :label="item.codeitemname"
+                                                :key="item.codeitemid"
+                                                :value="item.codeitemid"
+                                        ></el-option>
+                                    </el-select>
+                                </el-form-item>
+                            </el-col>
                     </el-form-item>
-                    <el-form-item label="籍贯" prop="jg">
-                        <el-select v-model="Info.jgid" @change="chooseJg">
-                            <el-option
-                                    v-for="item in jgList"
-                                    :label="item.codeitemname"
-                                    :key="item.codeitemid"
-                                    :value="item.codeitemid"
-                            ></el-option>
-                        </el-select>
-                    </el-form-item>
+                    <!--<el-form-item label="籍贯" prop="jg">-->
+                    <!--<el-select v-model="Info.jgid" @change="chooseJg">-->
+                    <!--<el-option-->
+                    <!--v-for="item in jgList"-->
+                    <!--:label="item.codeitemname"-->
+                    <!--:key="item.codeitemid"-->
+                    <!--:value="item.codeitemid"-->
+                    <!--&gt;</el-option>-->
+                    <!--</el-select>-->
+                    <!--</el-form-item>-->
                     <el-form-item label="户口性质" prop="hkxz">
                         <el-select v-model="Info.hkxz" placeholder>
                             <el-option
@@ -546,9 +563,25 @@
     import goBack from "@/components/goBack";
     // import {Actionsheet, Slider, Picker, Popup} from "vant";
 
+
+
     export default {
         name: "person",
         data() {
+            const checkSyd = (rule, value, callback) => {
+                if (this.Info.sydid === '') {
+                    callback(new Error('请选择省'));
+                } else {
+                    callback();
+                }
+            };
+            const checkJg = (rule, value, callback) => {
+                if (this.Info.jgid === '') {
+                    callback(new Error('请选择市'));
+                } else {
+                    callback();
+                }
+            };
             return {
                 title: "个人信息",
                 activeName: "1",
@@ -617,8 +650,8 @@
                 },
                 rule_std: {//学生信息
                     lxdh: [{required: true, message: "请正确填写联系电话", trigger: "blur"}],
-                    syd: [{required: true, message: "必填", trigger: "change"}],
-                    jg: [{required: true, message: "必填", trigger: "change"}],
+                    syd: [{validator: checkSyd, trigger: "change"}],
+                    jg: [{validator: checkJg, trigger: "change"}],
                     hkxz: [{required: true, message: "必填", trigger: "change"}],
                     hjqk: [{required: true, message: "必填", trigger: "change"}],
                     xq: [{required: true, message: "必填", trigger: "change"}],
