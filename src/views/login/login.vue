@@ -7,7 +7,7 @@
             </div>
             <div class="info">
                 <div>温馨提示:</div>
-                <div class="textIndent">2019年新生自助迎新时间为8月15日至9月1日，目前系统在维护期，请同学们8月15日以后登录使用！</div>
+                <div class="textIndent">2020年新生自助迎新时间为9月07日至9月13日，目前系统在维护期，请同学们在9月07日以后登录！</div>
             </div>
             <div class="pad20">
                 <van-field

@@ -1,5 +1,5 @@
 <template>
-    <div class="goback-div" :class="bg ? 'bg-blue' : ''">
+    <div class="goback-div" :toWhere="toWhere" :class="bg ? 'bg-blue' : ''">
         <van-icon name="arrow-left" @click="goBack"/>
         <div>{{title}}</div>
         <span></span>
@@ -12,10 +12,16 @@
         props: {
             title: String,
             bg: String,
+            toWhere:String
         },
         methods: {
             goBack() {
-                this.$router.go(-1)
+                console.log(this.toWhere)
+                // if(this.toWhere){
+                //     this.$router.push(this.toWhere)
+                // }else{
+                    this.$router.go(-1)
+                // }
             }
         }
     }

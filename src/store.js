@@ -10,11 +10,13 @@ export default new Vuex.Store({
         token: Cookies.get('setToken') || '',
         stdInfo: Cookies.get('setStdInfo') || {},//用户基本信息
         planList: [],//环节信息
+        areaStation:'',//当前选中的始发站
     },
     getters: {
         token: state => state.token,
         stdInfo: state => state.stdInfo,
-        planList: state => state.planList
+        planList: state => state.planList,
+        areaStation:state => state.areaStation
     },
     mutations: {
         setToken(state, data) {

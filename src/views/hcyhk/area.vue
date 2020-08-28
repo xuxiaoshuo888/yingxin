@@ -26,8 +26,9 @@
         methods: {
             getName(e) {
                 console.log(e)
-                this.$router.replace({path: '/hcyhk', query: {areaStation: e}})
-                // this.$router.go(-1)
+                // this.$router.replace({path: '/hcyhk', query: {areaStation: e}})
+                this.$store.state.areaStation = e
+                this.$router.go(-1)
             }
         },
         mounted() {

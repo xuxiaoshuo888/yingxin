@@ -1,6 +1,6 @@
 <template>
     <div>
-        <go-back :title="title"></go-back>
+        <go-back :title="title" :toWhere="toWhere"></go-back>
         <el-form ref="form" style="padding: 10px;">
             <el-form-item label="始发站">
                 <el-input v-model="start_value" readonly placeholder="请输入" @focus="toArea"></el-input>
@@ -12,13 +12,11 @@
         <div class="info">
             <div style="text-indent: 0;">注意事项：</div>
             <div style="text-indent: 25px;">
-                1、火车票优惠卡又称火车票学生优惠卡、学生购票优惠卡，是学生购买火车票打折用的卡，贴在学生证的后面。只有买了这个卡才能享受学生优惠。当你寒暑假往返家庭住地与学校区间须乘坐火车的，也可以凭此卡享受优惠。
+                学生证磁条是学生在寒暑假半价购买火车票的通行证。磁条内贴着一张芯片，学生在购买火车票时可以在机器上刷一下以享受购票优惠。
             </div>
         </div>
         <div class="btn-contain">
-            <van-button type="info" size="large" class="button-bg" @click="save">
-                提交
-            </van-button>
+            <van-button type="info" size="large" class="button-bg" @click="save">提交</van-button>
         </div>
     </div>
 </template>
@@ -33,6 +31,7 @@
         name: "hcyhk",
         data() {
             return {
+                toWhere:'/desk',
                 title: '火车优惠卡',
                 start: [],//始发站
                 end: [{
@@ -51,8 +50,12 @@
             getData() {
                 this.$ajax.get('/train_card_api/find').then(res => {
                     // console.log(res.data.data)
-                    this.start_value = res.data.data.hcz
-                    // this.end_value = res.data.data.zdz
+                    if (res.data.data.hcz) {
+                        this.start_value = res.data.data.hcz
+                    }
+                    if (this.$store.getters.areaStation) {
+                        this.start_value = this.$store.getters.areaStation
+                    }
                 })
             },
             getStations(arg) {
@@ -74,6 +77,7 @@
                         this.loading2 = false
                         this.end = res.data.data
                         this.$toast(res.data.data)
+
                     })
                 } else {
                     this.$toast('请填写始发站和终点站!')
@@ -89,14 +93,19 @@
                 this.$router.push('/hcyhk/area')
             }
         },
+        beforeCreate(){
+            console.log("beforeCreate")
+        },
         mounted() {
             //this.$refs.select.focus();
             this.getData()//shuju
         },
         updated() {
-            if (this.$route.query.areaStation) {
-                this.start_value = this.$route.query.areaStation
-            }
+            console.log("updated")
+        },
+        beforeDestroy(){
+            console.log('beforeDestroy')
+            this.$store.state.areaStation = ''
         }
     }
 </script>
