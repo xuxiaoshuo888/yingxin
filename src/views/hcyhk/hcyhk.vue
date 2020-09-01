@@ -3,11 +3,12 @@
         <go-back :title="title" :toWhere="toWhere"></go-back>
         <el-form ref="form" style="padding: 10px;">
             <el-form-item label="始发站">
-                <el-input v-model="start_value" readonly placeholder="请输入" @focus="toArea"></el-input>
+                <el-input v-model="start_value" disabled></el-input>
             </el-form-item>
             <el-form-item label="终点站">
-                <el-input v-model="end_value" disabled></el-input>
+                <el-input v-model="end_value" readonly placeholder="请输入" @focus="toArea"></el-input>
             </el-form-item>
+
         </el-form>
         <div class="info">
             <div style="text-indent: 0;">注意事项：</div>
@@ -33,12 +34,12 @@
             return {
                 toWhere:'/desk',
                 title: '火车优惠卡',
-                start: [],//始发站
-                end: [{
-                    codeitemname: '武汉站'
-                }],//终点站
-                start_value: "",//选定的开始站
-                end_value: "武汉站",//选定的结束站
+                start: [{
+                  codeitemname: '武汉站'
+                }],//始发站
+                end: [],//终点站
+                start_value: "武汉站",//选定的开始站
+                end_value: "",//选定的结束站
                 loading1: false,
                 loading2: false
             }
@@ -51,10 +52,10 @@
                 this.$ajax.get('/train_card_api/find').then(res => {
                     // console.log(res.data.data)
                     if (res.data.data.hcz) {
-                        this.start_value = res.data.data.hcz
+                        this.end_value = res.data.data.hcz
                     }
                     if (this.$store.getters.areaStation) {
-                        this.start_value = this.$store.getters.areaStation
+                        this.end_value = this.$store.getters.areaStation
                     }
                 })
             },
@@ -72,7 +73,7 @@
             save() {
                 if (this.start_value.trim() != '' && this.end_value.trim() != '') {
                     this.$ajax.get('/train_card_api/save', {
-                        params: {start: this.start_value, end: '武汉站'}
+                        params: {start: '武汉站', end:this.end_value }
                     }).then(res => {
                         this.loading2 = false
                         this.end = res.data.data
