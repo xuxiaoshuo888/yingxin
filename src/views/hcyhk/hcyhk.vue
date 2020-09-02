@@ -51,8 +51,8 @@
             getData() {
                 this.$ajax.get('/train_card_api/find').then(res => {
                     // console.log(res.data.data)
-                    if (res.data.data.hcz) {
-                        this.end_value = res.data.data.hcz
+                    if (res.data.data.zdz) {
+                        this.end_value = res.data.data.zdz
                     }
                     if (this.$store.getters.areaStation) {
                         this.end_value = this.$store.getters.areaStation
